@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Gym Pass</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_activity">Activity</string>
+    <string name="nav_notification">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
