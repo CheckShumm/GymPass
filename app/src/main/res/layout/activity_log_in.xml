@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context="com.example.nathanshumm.gympass.SignUpActivity">
+    tools:context="com.example.nathanshumm.gympass.LogInActivity">
+
 
     <LinearLayout
         android:id="@+id/homeTitle"
@@ -38,29 +39,28 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/et_signupEmail"
+            android:id="@+id/et_loginEmail"
             android:inputType="textEmailAddress"
+            android:gravity="center"
             android:hint="Email Address"
             android:layout_margin="50dp"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/et_signupPassword"
+            android:id="@+id/et_loginPassword"
             android:inputType="textPassword"
             android:gravity="center"
             android:hint="Password"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"/>
         <Button
-            android:id="@+id/signUpBtn"
+            android:id="@+id/loginBtn"
             android:gravity="center"
             android:layout_margin="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
             android:textColor="@color/colorWhite"
-            android:text="Sign up"/>
+            android:text="Log In"/>
     </LinearLayout>
-
 </RelativeLayout>
