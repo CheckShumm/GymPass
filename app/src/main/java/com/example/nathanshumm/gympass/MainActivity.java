@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("LeGym Pass");
 
         window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorDarkGrey));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
 
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
