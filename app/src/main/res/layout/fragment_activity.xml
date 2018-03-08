@@ -13,7 +13,7 @@
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is where i would put my chart\nIF I HAD ONE" />
+            android:text="Charts go here" />
 
     </LinearLayout>
 

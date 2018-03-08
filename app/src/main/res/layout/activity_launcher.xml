@@ -37,18 +37,18 @@
             android:layout_marginBottom="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorWhite"
-            android:textColor="@color/colorAccent"
+            android:background="@color/colorBurgundy"
+            android:textColor="@color/colorWhite"
             android:text="Sign Up"/>
         <Button
             android:id="@+id/la_loginBtn"
-            android:background="@color/colorWhite"
+            android:background="@color/colorBurgundy"
             android:gravity="center"
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorWhite"
             android:text="Log In"/>
     </LinearLayout>
 

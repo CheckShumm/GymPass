@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "323052006743",
+    "firebase_url": "https://le-gym-pass.firebaseio.com",
+    "project_id": "le-gym-pass",
+    "storage_bucket": "le-gym-pass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:323052006743:android:349159794d8772cb",
+        "android_client_info": {
+          "package_name": "com.example.nathanshumm.gympass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "323052006743-nopvb7l5ot6tuaef2fdno3hb2v46ndp2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nathanshumm.gympass",
+            "certificate_hash": "dc89f5d23b3fa2a4cf542a76d6f9e1fad10c743b"
+          }
+        },
+        {
+          "client_id": "323052006743-0g44e2cs39elch3gs9qodn9o53ga4pnv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX6AMg3xtszYwpkKIGwp_zro7FvSh2958"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "323052006743-0g44e2cs39elch3gs9qodn9o53ga4pnv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
