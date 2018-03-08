@@ -50,10 +50,11 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        final ProgressDialog progressDialog = ProgressDialog.show(LogInActivity.this, "Please wait...", "Processing...", true);
+
         if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(LogInActivity.this, "Username or password field is empty!", Toast.LENGTH_SHORT).show();
         } else {
+            final ProgressDialog progressDialog = ProgressDialog.show(LogInActivity.this, "Please wait...", "Processing...", true);
             firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
