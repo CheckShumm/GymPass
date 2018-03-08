@@ -44,22 +44,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        final ProgressDialog progressDialog = ProgressDialog.show(SignUpActivity.this, "Please wait...", "Processing...", true);
-        firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
+        if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+            Toast.makeText(SignUpActivity.this , "Username or password field is empty!", Toast.LENGTH_SHORT).show();
+        } else {
+            final ProgressDialog progressDialog = ProgressDialog.show(SignUpActivity.this, "Please wait...", "Processing...", true);
+            firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
 
-                        if(task.isSuccessful()){
-                            Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                            Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
-                            SignUpActivity.this.startActivity(loginActivityIntent);
-                        }else{
-                            Log.e("Registration_Err", task.getException().getMessage());
-                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
+                                SignUpActivity.this.startActivity(loginActivityIntent);
+                            } else {
+                                Log.e("Registration_Err", task.getException().getMessage());
+                                Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 }
