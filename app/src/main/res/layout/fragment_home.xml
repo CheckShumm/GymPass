@@ -5,15 +5,31 @@
     tools:context="com.example.nathanshumm.gympass.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
     <LinearLayout
+        android:id="@+id/qr_layout"
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/qrCodeImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/home_button_layout"
+        android:layout_below="@+id/qr_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:orientation="vertical">
+  
         <TextView
+            android:id="@+id/tv_noRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="You have not regiestered for a gym pass yet!"
@@ -27,6 +43,16 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:text="Register"
+            android:textColor="@color/colorWhite" />
+        <Button
+            android:id="@+id/qrGenBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorBurgundy"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="Generate QR Code"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
 </RelativeLayout>
