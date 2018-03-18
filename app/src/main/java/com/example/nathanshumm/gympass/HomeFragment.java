@@ -2,6 +2,7 @@ package com.example.nathanshumm.gympass;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -9,6 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 
 /**
@@ -17,7 +25,9 @@ import android.widget.Button;
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private Button registerButton;
-
+    private Button qrGenButton;
+    private ImageView qrCodeImage;
+    private int qrCounter = 0;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -31,6 +41,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         // Register Button
         registerButton = (Button) homeView.findViewById(R.id.registerBtn);
+        qrGenButton = (Button) homeView.findViewById(R.id.qrGenBtn);
+        qrCodeImage = (ImageView) homeView.findViewById(R.id.qrCodeImage);
+        qrGenButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
 
         return homeView;
@@ -39,12 +52,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Log.d("ERR", "WE HERE at least?");
+
         switch (v.getId()){
             case R.id.registerBtn:
-                Log.d("ERR", "WE HERE?");
                 Intent registerIntent = new Intent(getActivity(), RegisterActivity.class);
                 startActivity(registerIntent);
+                break;
+
+            case R.id.qrGenBtn:
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                try{
+                    BitMatrix bitMatrix = multiFormatWriter.encode("helloThisIsATest", BarcodeFormat.QR_CODE, 200, 200);
+                    BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                    Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+                    qrCodeImage.setImageBitmap(bitmap);
+
+                }
+                catch   (WriterException e){
+                    e.printStackTrace();
+                }
+
                 break;
         }
     }
