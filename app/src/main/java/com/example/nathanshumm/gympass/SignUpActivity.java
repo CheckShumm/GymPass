@@ -17,6 +17,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +27,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText email;
     private EditText password;
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    private FirebaseDatabase database;
+    private DatabaseReference  databaseReference;
     private Button loginButton;
 
     @Override
@@ -38,6 +44,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         password = (EditText)findViewById(R.id.et_signupPassword);
         loginButton = (Button)findViewById(R.id.signUpBtn);
         firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         loginButton.setOnClickListener(this);
     }
@@ -56,6 +65,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
                             if (task.isSuccessful()) {
                                 Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                writeNewUser();
                                 Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
                                 SignUpActivity.this.startActivity(loginActivityIntent);
                             } else {
@@ -65,5 +75,14 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     });
         }
+    }
+
+    public void writeNewUser(){
+        String userId;
+        String email;
+        userId = firebaseUser.getUid();
+        email = firebaseUser.getEmail();
+        Log.e("email err: ", email);
+        databaseReference.child("Users").child(userId).child("Email").setValue(email);
     }
 }
