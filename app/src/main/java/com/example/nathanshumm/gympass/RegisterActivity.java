@@ -2,7 +2,9 @@ package com.example.nathanshumm.gympass;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
@@ -163,6 +165,15 @@ public class RegisterActivity extends AppCompatActivity {
         etemail=email.getText().toString().trim();
         etphone=phone.getText().toString().trim();
 
+    }
+
+    public void saveToMemory(){
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nameKey",etname);
+        editor.apply();
+        editor.putString("surnameKey", etsurname);
+        editor.commit();
     }
 
 }

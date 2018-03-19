@@ -6,8 +6,8 @@
     <string name="nav_notification">Notifications</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="Name">Name</string>
-    <string name="Surname">Surname</string>
-    <string name="Email">Email</string>
+    <string name="nameKey">nameKey</string>
+    <string name="surnameKey">surnameKey</string>
+    <string name="emailKey">emailKey</string>
 
 </resources>
