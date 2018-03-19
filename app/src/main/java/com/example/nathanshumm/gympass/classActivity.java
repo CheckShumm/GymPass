@@ -15,6 +15,7 @@ public class classActivity extends AppCompatActivity {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Classes");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 }

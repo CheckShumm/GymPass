@@ -5,11 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.nathanshumm.gympass.RegisterActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/toolbar"
+            tools:layout_editor_absoluteX="41dp"
+            tools:layout_editor_absoluteY="333dp"></include>
+    </LinearLayout>
 
-    <include
-        layout="@layout/toolbar"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="333dp"></include>
 
     <Button
         android:id="@+id/btn_next"

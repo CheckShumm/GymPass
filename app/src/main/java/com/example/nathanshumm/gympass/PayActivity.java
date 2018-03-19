@@ -1,26 +1,31 @@
 package com.example.nathanshumm.gympass;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-public class PayActivity extends AppCompatActivity {
+public class PayActivity extends AppCompatActivity implements View.OnClickListener{
 
     private CheckBox student, staff, seniors, cbPublic, spinning, yoga, fusion, zumba;
     private Toolbar toolbar;
-
+    private Button paymentButton;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
+
+        paymentButton = (Button)findViewById(R.id.paymentButton);
+        paymentButton.setOnClickListener(this);
 /*
         student = (CheckBox) findViewById(R.id.cb_student);
         staff = (CheckBox) findViewById(R.id.cb_staff);
@@ -83,4 +88,15 @@ public class PayActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.paymentButton:
+                Intent qrGenItent = new Intent(this, MainActivity.class);
+                startActivity(qrGenItent);
+                break;
+            default:
+                break;
+        }
+    }
 }
