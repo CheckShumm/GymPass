@@ -24,6 +24,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 
@@ -35,9 +38,16 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText phone;
     private Toolbar toolbar;
     private String etname, etsurname, etemail, etphone;
-    Button payButton;
-    Button photoButton;
-    ImageView imageView;
+
+    // Database instance
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+
+    private Button payButton;
+    private Button photoButton;
+    private ImageView imageView;
 
 
     @Override
@@ -45,6 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        // Database
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        firebaseAuth = firebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         email = (EditText) findViewById(R.id.et_email);
         name = (EditText) findViewById(R.id.et_name);
@@ -112,6 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
         }
         public void onSignupSuccess(){
+            databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
+            databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
             Intent i = new Intent (RegisterActivity.this, PayActivity.class);
             startActivity (i);
     }

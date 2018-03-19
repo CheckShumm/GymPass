@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context="com.example.nathanshumm.gympass.LogInActivity">
+
+    <LinearLayout
+        android:id="@+id/homeTitle"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Le Gym Pass"
+            android:textSize="30sp"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_marginTop="75dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/loginInputLayout"
+        android:layout_below="@+id/homeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_loginEmail"
+            android:inputType="textEmailAddress"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:hint="Email Address"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textColorHint="@color/colorBurgundy"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/colorWhite"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_loginPassword"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:hint="Password"
+            android:textColorHint="@color/colorBurgundy"
+            android:textColor="@color/colorWhite"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:backgroundTint="@color/colorWhite"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/loginInputLayout"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/la_loginBtn"
+            android:gravity="center"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="70dp"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBurgundy"
+            android:textColor="@color/colorWhite"
+            android:text="Log in"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textAlignment="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="70dp"
+            android:text="No account yet? Create one now!"/>
+        <Button
+            android:id="@+id/la_signUpBtn"
+            android:background="@color/colorBurgundy"
+            android:gravity="center"
+            android:textSize="12dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:textColor="@color/colorWhite"
+            android:text="Sign Up"/>
+    </LinearLayout>
+
+</RelativeLayout>

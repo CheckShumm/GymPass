@@ -21,27 +21,30 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Window window;
+    private Button signupButton;
+    private Button loginButton;
     private EditText email;
     private EditText password;
     private FirebaseAuth firebaseAuth;
-    private Button loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_login);
 
         window = this.getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorAccent));
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
 
+        signupButton = (Button)findViewById(R.id.la_signUpBtn);
+        loginButton = (Button)findViewById(R.id.la_loginBtn);
         email = (EditText)findViewById(R.id.et_loginEmail);
         password = (EditText)findViewById(R.id.et_loginPassword);
-        loginButton = (Button)findViewById(R.id.loginBtn);
         firebaseAuth = FirebaseAuth.getInstance();
 
+        signupButton.setOnClickListener(this);
         loginButton.setOnClickListener(this);
-    }
 
+    }
     @Override
     protected void onStart() {
         super.onStart();
@@ -51,26 +54,35 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            Toast.makeText(LogInActivity.this, "Username or password field is empty!", Toast.LENGTH_SHORT).show();
-        } else {
-            final ProgressDialog progressDialog = ProgressDialog.show(LogInActivity.this, "Please wait...", "Processing...", true);
-            firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
+        switch(v.getId()){
+            case R.id.la_signUpBtn:
+                // go to signup activity
+                Intent signupItent = new Intent(this,SignUpActivity.class);
+                this.startActivity(signupItent);
+                break;
+            case R.id.la_loginBtn:
+                if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                    Toast.makeText(LogInActivity.this, "Username or password field is empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    final ProgressDialog progressDialog = ProgressDialog.show(LogInActivity.this, "Please wait...", "Processing...", true);
+                    firebaseAuth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
 
-                            if (task.isSuccessful()) {
-                                Toast.makeText(LogInActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
-                                Intent mainActivityIntent = new Intent(LogInActivity.this, MainActivity.class);
-                                LogInActivity.this.startActivity(mainActivityIntent);
-                            } else {
-                                Log.e("Auth_Err", task.getException().getMessage());
-                                Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LogInActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
+                                        Intent mainActivityIntent = new Intent(LogInActivity.this, MainActivity.class);
+                                        LogInActivity.this.startActivity(mainActivityIntent);
+                                    } else {
+                                        Log.e("Auth_Err", task.getException().getMessage());
+                                        Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                }
+                break;
         }
     }
 }
