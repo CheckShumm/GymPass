@@ -52,15 +52,17 @@
             android:hint="Password"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"/>
+
         <Button
             android:id="@+id/signUpBtn"
-            android:gravity="center"
-            android:layout_margin="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="50dp"
             android:background="@color/colorAccent"
-            android:textColor="@color/colorWhite"
-            android:text="Sign up"/>
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="Sign up"
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
 </RelativeLayout>

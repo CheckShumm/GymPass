@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         activityFragment = new ActivityFragment();
-         setFragment(homeFragment);
+        setFragment(homeFragment);
 
         mainFrame = (FrameLayout)findViewById(R.id.m_Frame);
         mBottomNav = (BottomNavigationView)findViewById(R.id.m_navBar);
