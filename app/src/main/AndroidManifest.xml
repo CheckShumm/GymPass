@@ -27,7 +27,10 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".classActivity" />
         <activity android:name=".PayActivity" />
-        <activity android:name=".fusionActivity"></activity>
+        <activity android:name=".fusionActivity" />
+        <activity android:name=".spinningActivity" />
+        <activity android:name=".yogaActivity" />
+        <activity android:name=".zumbaActivity"></activity>
     </application>
 
 </manifest>
