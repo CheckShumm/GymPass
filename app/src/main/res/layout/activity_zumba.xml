@@ -11,42 +11,42 @@
         android:id="@+id/include"
         layout="@layout/toolbar"></include>
 
-
     <TextView
         android:id="@+id/textView_fusion"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="84dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/fusion_text"
+        android:text="@string/zumba_text"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="14sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.503" />
+        app:layout_constraintVertical_bias="0.43" />
 
     <ImageView
-        android:id="@+id/imageView_fusion"
+        android:id="@+id/imageView_zumba"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/fusion_table"
+        android:src="@drawable/zumba_table"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
-        app:layout_constraintVertical_bias="0.972" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.967" />
 
     <Button
-        android:id="@+id/fusion_button_pay_A"
+        android:id="@+id/zumba_button_pay_A"
         android:layout_width="36dp"
         android:layout_height="13dp"
         android:layout_marginBottom="8dp"
@@ -61,11 +61,30 @@
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.651" />
 
 
     <Button
-        android:id="@+id/fusion_button_pay_B"
+        android:id="@+id/zumba_button_pay_B"
+        android:layout_width="36dp"
+        android:layout_height="13dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="?android:attr/colorAccent"
+        android:text="@string/join_class_button"
+        android:textSize="8sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include"
+        app:layout_constraintVertical_bias="0.682" />
+
+
+    <Button
+        android:id="@+id/zumba_button_pay_C"
         android:layout_width="36dp"
         android:layout_height="13dp"
         android:layout_marginBottom="8dp"
@@ -80,14 +99,6 @@
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.784" />
-
-
-
-
-
-
-
-
+        app:layout_constraintVertical_bias="0.714" />
 
 </android.support.constraint.ConstraintLayout>

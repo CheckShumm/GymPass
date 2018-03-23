@@ -2,13 +2,10 @@ package com.example.nathanshumm.gympass;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-
-
-public class fusionActivity extends AppCompatActivity {
+public class zumbaActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
@@ -19,10 +16,10 @@ public class fusionActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Fusion");
+        getSupportActionBar().setTitle("Zumba");
 
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     //Back Button
