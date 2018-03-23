@@ -4,10 +4,9 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-feature android:name="android.hardware.camera2" ></uses-feature>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-feature android:name="android.hardware.camera2" />
 
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,8 +25,19 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".classActivity"></activity>
-        <activity android:name=".PayActivity"></activity>
+        <activity android:name=".classActivity" />
+        <activity android:name=".PayActivity" />
+        <activity android:name=".ChooseActivity" />
+        <activity
+            android:name=".MembershipActivity"
+            android:label="@string/title_activity_membership"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".StudentPayment" />
+        <activity android:name=".StudentActivity" />
+        <activity android:name=".PublicPayment" />
+        <activity android:name=".SeniorPayment" />
+        <activity android:name=".StaffPayment"></activity>
     </application>
 
 </manifest>
