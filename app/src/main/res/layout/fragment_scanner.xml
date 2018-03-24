@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.nathanshumm.gympass.ScannerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="QR CODE SCANNER"
+            android:textColor="@color/colorBurgundy"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/scannerFirstName"
+            android:layout_marginTop="30dp"
+            android:text=""
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/scannerLastName"
+            android:text=""
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:layout_marginTop="50dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+        <Button
+            android:layout_marginTop="50dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/qrScanBtn"
+            android:text="SCAN"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorBurgundy"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>
