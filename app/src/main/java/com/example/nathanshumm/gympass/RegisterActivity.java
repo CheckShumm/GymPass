@@ -131,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity {
         public void onSignupSuccess(){
             databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
             databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
-            Intent i = new Intent (RegisterActivity.this, PayActivity.class);
+            Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
             startActivity (i);
     }
 
