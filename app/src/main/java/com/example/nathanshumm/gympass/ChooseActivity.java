@@ -8,6 +8,7 @@ import android.widget.Button;
 public class ChooseActivity extends AppCompatActivity {
 
     private Button memberButton;
+    private Button classButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,11 +16,20 @@ public class ChooseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choose);
 
         memberButton=(Button)findViewById(R.id.btn_membership);
+        classButton=(Button)findViewById(R.id.btn_class);
 
         memberButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(ChooseActivity.this, MembershipActivity.class);
+                startActivity (i);
+            }
+        });
+
+        classButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(ChooseActivity.this, classActivity.class);
                 startActivity (i);
             }
         });

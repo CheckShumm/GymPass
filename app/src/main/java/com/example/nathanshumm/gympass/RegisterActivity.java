@@ -32,6 +32,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 
+import javax.microedition.khronos.egl.EGL;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText name;
@@ -40,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText phone;
     private Toolbar toolbar;
     private String etname, etsurname, etemail, etphone;
+
 
     // Database instance
     private FirebaseDatabase database;
@@ -69,6 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
         surname = (EditText) findViewById(R.id.et_surname);
         payButton = (Button) findViewById(R.id.btn_next);
         final int CAM_REQUEST= 1;
+        imageView= (ImageView) findViewById(R.id.iv_picture);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -85,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         photoButton = (Button) findViewById(R.id.btn_picture);
-        imageView = (ImageView) findViewById(R.id.iv_picture);
+
 
         photoButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -117,29 +121,29 @@ public class RegisterActivity extends AppCompatActivity {
         imageView.setImageDrawable(Drawable.createFromPath(path));
     }
 
-        public void register() {
-            initialize();
+    public void register() {
+        initialize();
 
         if (!validate()) {
 
-            Toast.makeText(this, "Signup has Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Registration has failed", Toast.LENGTH_SHORT).show();
         }
         else {
             onSignupSuccess();
         }
-        }
-        public void onSignupSuccess(){
-            databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
-            databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
-            Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
-            startActivity (i);
+    }
+    public void onSignupSuccess(){
+        databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
+        databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
+        Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
+        startActivity (i);
     }
 
     public boolean validate(){
         boolean valid=true;
         if (etname.isEmpty() || etname.length()>32) {
-        name.setError("Please enter valid name");
-        valid=false;
+            name.setError("Please enter valid name");
+            valid=false;
         }
         if (etsurname.isEmpty() || etsurname.length()>32) {
             surname.setError("Please enter valid name");
@@ -156,15 +160,20 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
 
+        if (imageView.getDrawable()==null){
+            Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
+            valid=false;
+
+        }
+
 
         return valid;
-}
+    }
     public void initialize(){
         etname=name.getText().toString().trim();
         etsurname=surname.getText().toString().trim();
         etemail=email.getText().toString().trim();
         etphone=phone.getText().toString().trim();
-
     }
 
     public void saveToMemory(){
@@ -175,5 +184,4 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString("surnameKey", etsurname);
         editor.commit();
     }
-
 }

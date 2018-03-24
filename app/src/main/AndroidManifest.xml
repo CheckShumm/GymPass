@@ -26,7 +26,19 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".classActivity" />
-        <activity android:name=".PayActivity" />
+
+        <activity android:name=".ChooseActivity" />
+        <activity
+            android:name=".MembershipActivity"
+            android:label="@string/title_activity_membership"
+            android:theme="@style/AppTheme" />
+
+        <activity android:name=".StudentPayment" />
+
+        <activity android:name=".PublicPayment" />
+        <activity android:name=".SeniorPayment" />
+        <activity android:name=".StaffPayment"/>
+
         <activity android:name=".fusionActivity" />
         <activity android:name=".spinningActivity" />
         <activity android:name=".yogaActivity" />
