@@ -1,6 +1,7 @@
 package com.example.nathanshumm.gympass;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,14 +9,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 public class PayActivity extends AppCompatActivity implements View.OnClickListener{
 
     private CheckBox student, staff, seniors, cbPublic, spinning, yoga, fusion, zumba;
     private Toolbar toolbar;
+    private ImageView qrCodeImage;
     private Button paymentButton;
 
 
@@ -23,7 +32,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pay);
-
+        qrCodeImage = (ImageView) findViewById(R.id.qrCodeImage);
         paymentButton = (Button)findViewById(R.id.paymentButton);
         paymentButton.setOnClickListener(this);
 /*

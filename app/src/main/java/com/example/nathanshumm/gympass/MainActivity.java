@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
+
         databaseReference.addChildEventListener(childEventListener);
 
 
@@ -168,11 +169,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    @Override
-    protected void onStart() {
-
-        super.onStart();
-    }
 
     public void setNavDrawer(){
         NavigationView navigationView = (NavigationView)findViewById(R.id.nav_view);

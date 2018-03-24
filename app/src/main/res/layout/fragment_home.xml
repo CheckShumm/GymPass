@@ -2,17 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/homeFragmentID"
+    android:tag="homeFragmentTag"
     tools:context="com.example.nathanshumm.gympass.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id="@+id/qr_layout"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="180dp"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:visibility="gone"
         android:gravity="center">
         <ImageView
             android:id="@+id/qrCodeImage"
@@ -52,6 +55,7 @@
             android:background="@color/colorBurgundy"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
+            android:visibility="gone"
             android:text="Generate QR Code"
             android:textColor="@color/colorWhite" />
     </LinearLayout>

@@ -8,15 +8,14 @@
     tools:context="com.example.nathanshumm.gympass.classActivity">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/toolbar"
-        ></include>
+        layout="@layout/toolbar">
+    </include>
 
     <TextView
         android:id="@+id/textView_yoga"
         android:layout_width="wrap_content"
         android:layout_height="104dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="260dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/yoga_text"
@@ -34,7 +33,7 @@
     <ImageView
         android:id="@+id/imageView_yoga"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="231dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"

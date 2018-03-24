@@ -12,28 +12,24 @@ public class spinningActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zumba);
+        setContentView(R.layout.activity_spinning);
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Spinning");
 
-       // getSupportActionBar().setDisplayShowHomeEnabled(true);
-       // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-
-    //Back Button
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == android.R.id.home){
-            this.finish();
+        if(toolbar != null){
+            getSupportActionBar().setTitle("Spinning");
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        return super.onOptionsItemSelected(item);
+    }
 
+    // back button functionality
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 }

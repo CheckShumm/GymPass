@@ -11,7 +11,8 @@
         <include
             layout="@layout/toolbar"
             tools:layout_editor_absoluteX="41dp"
-            tools:layout_editor_absoluteY="333dp"></include>
+            tools:layout_editor_absoluteY="333dp">
+        </include>
     </LinearLayout>
 
 
