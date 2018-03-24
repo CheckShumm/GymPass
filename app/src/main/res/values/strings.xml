@@ -9,6 +9,7 @@
     <string name="nameKey">nameKey</string>
     <string name="surnameKey">surnameKey</string>
     <string name="emailKey">emailKey</string>
+    <string name="title_activity_membership">MembershipActivity</string>
 
     //Class activity strings
     <string name="Zumba">Zumba</string>

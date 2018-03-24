@@ -42,8 +42,8 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fusion_button:
-                Intent fusionIntent = new Intent(this, fusionActivity.class);
-                this.startActivity(fusionIntent);
+                //Intent fusionIntent = new Intent(this, fusionActivity.class);
+               //       this.startActivity(fusionIntent);
                 break;
             case R.id.zumba_button:
                 Intent zumbaIntent = new Intent(this, zumbaActivity.class);
