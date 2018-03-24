@@ -1,6 +1,7 @@
 package com.example.nathanshumm.gympass;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -126,15 +127,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onStart() {
-
+    public void onAttach(Context context) {
         if(registered()){
             registerButton.setVisibility(View.GONE);
             noRegistrationTV.setVisibility(View.GONE);
             generateQR();
         }
-
-        super.onStart();
+        super.onAttach(context);
     }
 
     @Override

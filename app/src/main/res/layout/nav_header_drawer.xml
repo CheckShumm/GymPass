@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
             android:layout_marginRight="5dp"
-            android:text="asda"
+            android:text=""
             android:textSize="18sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
         <TextView

@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private HomeFragment homeFragment;
     private NotificationFragment notificationFragment;
     private ActivityFragment activityFragment;
+    private ScannerFragment scannerFragment;
 
     // user data
     private String name;
@@ -93,11 +94,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        scannerFragment = new ScannerFragment();
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         activityFragment = new ActivityFragment();
-         setFragment(homeFragment);
-
+        Log.e("UID",firebaseUser.getUid().toString());
+        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+            Log.e("UID", firebaseUser.getUid().toString());
+            setFragment(scannerFragment);
+        }else {
+            setFragment(homeFragment);
+        }
         mainFrame = (FrameLayout)findViewById(R.id.m_Frame);
         mBottomNav = (BottomNavigationView)findViewById(R.id.m_navBar);
 
