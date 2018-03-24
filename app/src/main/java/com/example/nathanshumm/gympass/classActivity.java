@@ -46,12 +46,16 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
                //       this.startActivity(fusionIntent);
                 break;
             case R.id.zumba_button:
-                //Intent zumbaIntent = new Intent(this, zumbaActivity.class);
-                //this.startActivity(zumbaIntent);
+                Intent zumbaIntent = new Intent(this, zumbaActivity.class);
+                this.startActivity(zumbaIntent);
                 break;
             case R.id.spinning_button:
+                Intent spinningIntent = new Intent(this, spinningActivity.class);
+                this.startActivity(spinningIntent);
                 break;
             case R.id.yoga_button:
+                Intent yogaIntent = new Intent(this, yogaActivity.class);
+                this.startActivity(yogaIntent);
                 break;
         }
     }

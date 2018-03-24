@@ -21,6 +21,9 @@
     <string name="yoga_text">At LeGym, a typical class emphasizes movement, based on respiration and body posture all while accompanying music.   Through fluid sequences of continual poses and postural movements, body toning and relaxation are highlighted; as well as body awareness, in search of balance of interior and exterior space.</string>
     <string name="spinning_text">Our classes are designed to improve the outdoor skill set of a rider and increase endurance while providing an intense cardiovascular-based workout. Some of the movements and positions include hill climbs, sprints and intervals.</string>
     <string name="zumba_text">Zumba is a mixture of dance and aerobic exercise routines accompanied by popular music, mainly Latin-American, but also featuring hip-hop, soca, samba and world music. Zumba classes are for everybody and every class feels like a party.</string>
+
+    <string name="join_class_button">JOIN</string>
+
     //End of class activity strings
 
 </resources>
