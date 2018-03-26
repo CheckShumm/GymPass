@@ -11,6 +11,7 @@
         android:gravity="center"
         android:orientation="vertical">
         <TextView
+            android:layout_marginTop="100dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -26,17 +27,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
-            android:id="@+id/scannerLastName"
+        android:id="@+id/scannerLastName"
+        android:text=""
+        android:textSize="25sp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/scannerMembership"
             android:text=""
             android:textSize="25sp"
             android:textColor="@color/colorPrimary"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <ImageView
-            android:layout_marginTop="50dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
+        <TextView
+            android:id="@+id/scannerClasses"
+            android:text=""
+            android:textSize="25sp"
+            android:textColor="@color/colorPrimary"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <Button
             android:layout_marginTop="50dp"
             android:layout_width="200dp"

@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String email;
     private String firstNameScanner;
     private String lastNameScanner;
+    private String classesScanner;
+    private String membershipScanner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -225,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_drawer_profile:
                 break;
             case R.id.nav_drawer_membership:
+                Intent memberIntent = new Intent(this, MembershipActivity.class);
+                this.startActivity(memberIntent);
                 break;
             case R.id.nav_drawer_classes:
                 Intent classesIntent = new Intent(this, classActivity.class);
@@ -235,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_drawer_settings:
                 break;
             case R.id.nav_drawer_log_out:
+                Intent loginIntent = new Intent(this, LogInActivity.class);
+                this.startActivity(loginIntent);
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -277,7 +283,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
                 Log.e("firstNameScanner", firstNameScanner);
                 lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
-                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner);
+                membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
+                classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
             }
 
             @Override

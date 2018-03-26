@@ -26,10 +26,11 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".classActivity" />
-        <activity android:name=".PayActivity" />
+        <activity android:name=".MembershipActivity" />
         <activity android:name=".fusionActivity" />
         <activity android:name=".spinningActivity" />
         <activity android:name=".yogaActivity" />
+        <activity android:name=".StaffPayment" />
         <activity android:name=".zumbaActivity"></activity>
     </application>
 
