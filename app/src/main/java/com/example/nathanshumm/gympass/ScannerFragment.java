@@ -40,10 +40,14 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
 
     private String surname;
     private String name;
+    private String classes;
+    private String membership;
 
     private Button scannerButton;
     private TextView firstNameTV;
     private TextView lastNameTV;
+    private TextView membershipTV;
+    private TextView classesTV;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +57,8 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         scannerButton = (Button)scannerView.findViewById(R.id.qrScanBtn);
         firstNameTV = (TextView)scannerView.findViewById(R.id.scannerFirstName);
         lastNameTV = (TextView)scannerView.findViewById(R.id.scannerLastName);
+        membershipTV = (TextView)scannerView.findViewById(R.id.scannerMembership);
+        classesTV = (TextView)scannerView.findViewById(R.id.scannerClasses);
 
         // Database
         database = FirebaseDatabase.getInstance();
@@ -66,6 +72,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
                 Log.e("HERE", "test");
                 name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
                 surname = dataSnapshot.child(firebaseUser.getUid()).child("Surname").getValue(String.class);
+                membership = dataSnapshot.child(firebaseUser.getUid()).child("Membership").getValue(String.class);
             }
 
             @Override
@@ -143,8 +150,10 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void setNameTextView(String firstName, String lastName){
+    public void setNameTextView(String firstName, String lastName, String membership, String classes){
         firstNameTV.setText(firstName);
         lastNameTV.setText(lastName);
+        membershipTV.setText(membership);
+        classesTV.setText(classes);
     }
 }
