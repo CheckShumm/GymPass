@@ -31,6 +31,9 @@
         <activity android:name=".spinningActivity" />
         <activity android:name=".yogaActivity" />
         <activity android:name=".StaffPayment" />
+        <activity android:name=".StudentPayment" />
+        <activity android:name=".SeniorPayment" />
+        <activity android:name=".PublicPayment" />
         <activity android:name=".zumbaActivity"></activity>
     </application>
 
