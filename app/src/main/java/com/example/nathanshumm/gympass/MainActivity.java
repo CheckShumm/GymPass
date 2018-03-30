@@ -23,6 +23,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -32,6 +33,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.w3c.dom.Text;
 
@@ -58,12 +61,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private HomeFragment homeFragment;
     private NotificationFragment notificationFragment;
     private ActivityFragment activityFragment;
+    private ScannerFragment scannerFragment;
 
+    // child listener
+    private ChildEventListener childEventListener;
+
+    private TextView firstNameTV;
+    private TextView lastNameTV;
     // user data
     private String name;
     private String surname;
     private String email;
-
+    private String firstNameScanner;
+    private String lastNameScanner;
+    private String classesScanner;
+    private String membershipScanner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +94,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        firstNameTV = (TextView)findViewById(R.id.scannerFirstName);
+        lastNameTV = (TextView)findViewById(R.id.scannerLastName);
 
         // Database
         database = FirebaseDatabase.getInstance();
@@ -93,11 +107,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        scannerFragment = new ScannerFragment();
         homeFragment = new HomeFragment();
         notificationFragment = new NotificationFragment();
         activityFragment = new ActivityFragment();
-         setFragment(homeFragment);
-
+        Log.e("UID",firebaseUser.getUid().toString());
+        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+            Log.e("UID", firebaseUser.getUid().toString());
+            setFragment(scannerFragment);
+        }else {
+            setFragment(homeFragment);
+        }
         mainFrame = (FrameLayout)findViewById(R.id.m_Frame);
         mBottomNav = (BottomNavigationView)findViewById(R.id.m_navBar);
 
@@ -122,7 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         });
 
 
-        ChildEventListener childEventListener = new ChildEventListener() {
+        childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
@@ -157,6 +177,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseReference.addChildEventListener(childEventListener);
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+            //Log.e("UID", firebaseUser.getUid().toString());
+            setFragment(scannerFragment);
+        }else {
+            setFragment(homeFragment);
+        }
+        super.onStart();
     }
 
     @Override
@@ -196,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_drawer_profile:
                 break;
             case R.id.nav_drawer_membership:
+                Intent memberIntent = new Intent(this, MembershipActivity.class);
+                this.startActivity(memberIntent);
                 break;
             case R.id.nav_drawer_classes:
                 Intent classesIntent = new Intent(this, classActivity.class);
@@ -206,6 +239,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_drawer_settings:
                 break;
             case R.id.nav_drawer_log_out:
+                Intent loginIntent = new Intent(this, LogInActivity.class);
+                this.startActivity(loginIntent);
                 break;
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -215,9 +250,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("HERE", "HEEERE!#!");
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "You cancelled the Scanning!", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e("SCAN", result.getContents());
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                displayInfo(result.getContents());
+                //scannerFragment.setNameTextView(result.getContents());
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
 
         }
+    }
+
+    public void displayInfo(String UID){
+        final String id = UID;
+        Log.e("ID", id);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
+                Log.e("firstNameScanner", firstNameScanner);
+                lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
+                membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
+                classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

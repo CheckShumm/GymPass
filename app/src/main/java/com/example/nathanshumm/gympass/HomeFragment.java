@@ -1,6 +1,7 @@
 package com.example.nathanshumm.gympass;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -126,15 +127,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
-    public void onStart() {
-
+    public void onAttach(Context context) {
         if(registered()){
             registerButton.setVisibility(View.GONE);
             noRegistrationTV.setVisibility(View.GONE);
             generateQR();
         }
-
-        super.onStart();
+        super.onAttach(context);
     }
 
     @Override
@@ -169,7 +168,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         qrLayout.setVisibility(View.VISIBLE);
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
         try{
-            BitMatrix bitMatrix = multiFormatWriter.encode("QRCode", BarcodeFormat.QR_CODE, 200, 200);
+            BitMatrix bitMatrix = multiFormatWriter.encode(QRCode, BarcodeFormat.QR_CODE, 200, 200);
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
             Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
             qrCodeImage.setImageBitmap(bitmap);
