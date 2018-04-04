@@ -4,11 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.example.nathanshumm.gympass.MembershipActivity">
 
     <Button
         android:id="@+id/btn_student"
         android:layout_width="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
@@ -22,6 +27,10 @@
         android:id="@+id/btn_staff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:layout_marginBottom="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -35,6 +44,10 @@
         android:id="@+id/btn_seniors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -47,6 +60,10 @@
         android:id="@+id/btn_public"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:background="@color/colorAccent"
+        android:textColor="@color/colorWhite"
         android:layout_marginBottom="64dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -57,8 +74,10 @@
 
     <TextView
         android:id="@+id/tv_select"
+        android:textColor="@color/colorBurgundy"
         android:layout_width="278dp"
         android:layout_height="40dp"
+        android:textStyle="bold"
         android:layout_marginBottom="28dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -68,17 +87,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/tv_select"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

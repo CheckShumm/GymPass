@@ -33,7 +33,6 @@ public class SeniorPayment extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i=new Intent(SeniorPayment.this, classActivity.class);
                 startActivity (i);
-
             }
         });
     }
