@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private Window window;
 
-
     private TextView navFirstname;
     private TextView navSurname;
     private TextView navEmail;
@@ -112,12 +111,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notificationFragment = new NotificationFragment();
         activityFragment = new ActivityFragment();
         Log.e("UID",firebaseUser.getUid().toString());
+
         if(firebaseUser.getUid().toString().contains("T3VGSX7")){
             Log.e("UID", firebaseUser.getUid().toString());
             setFragment(scannerFragment);
         }else {
             setFragment(homeFragment);
         }
+
         mainFrame = (FrameLayout)findViewById(R.id.m_Frame);
         mBottomNav = (BottomNavigationView)findViewById(R.id.m_navBar);
 

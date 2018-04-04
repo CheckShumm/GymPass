@@ -29,4 +29,10 @@
 
     //End of class activity strings
 
+    <string-array name="types">
+        <item>Classes</item>
+        <item>Gym Equipment</item>
+        <item>LeGym Events</item>
+    </string-array>
+
 </resources>
