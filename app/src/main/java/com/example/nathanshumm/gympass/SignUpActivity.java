@@ -68,6 +68,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                 writeNewUser();
                                 Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
                                 SignUpActivity.this.startActivity(loginActivityIntent);
+                                SignUpActivity.this.finish();
                             } else {
                                 Log.e("Registration_Err", task.getException().getMessage());
                                 Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
