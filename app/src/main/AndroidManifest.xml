@@ -26,6 +26,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".classActivity" />
+        <activity android:name=".ChooseActivity" />
         <activity android:name=".MembershipActivity" />
         <activity android:name=".fusionActivity" />
         <activity android:name=".spinningActivity" />

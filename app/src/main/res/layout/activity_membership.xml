@@ -10,11 +10,11 @@
         android:id="@+id/btn_student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="36dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Student ($70.00)"
-        app:layout_constraintBottom_toTopOf="@+id/et_id"
+        app:layout_constraintBottom_toTopOf="@+id/btn_staff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -55,19 +55,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
-        android:id="@+id/et_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Student ID:"
-        app:layout_constraintBottom_toTopOf="@+id/btn_staff"
-        tools:layout_editor_absoluteX="85dp" />
-
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tv_select"
         android:layout_width="278dp"
         android:layout_height="40dp"
         android:layout_marginBottom="28dp"
@@ -78,5 +67,6 @@
         app:layout_constraintBottom_toTopOf="@+id/btn_student"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>
