@@ -51,12 +51,10 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-
     private Button payButton;
     private Button photoButton;
     private ImageView imageView;
     private Window window;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-
         email = (EditText) findViewById(R.id.et_email);
         name = (EditText) findViewById(R.id.et_name);
         phone = (EditText) findViewById(R.id.et_phoneNmb);
@@ -95,7 +92,6 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         photoButton = (Button) findViewById(R.id.btn_picture);
-
 
         photoButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -143,6 +139,7 @@ public class RegisterActivity extends AppCompatActivity {
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
         Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
         startActivity (i);
+        finish();
     }
 
     public boolean validate(){

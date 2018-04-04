@@ -23,6 +23,7 @@ public class ChooseActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i=new Intent(ChooseActivity.this, MembershipActivity.class);
                 startActivity (i);
+                //finish();
             }
         });
 

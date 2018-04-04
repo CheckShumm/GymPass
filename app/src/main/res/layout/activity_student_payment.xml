@@ -8,13 +8,13 @@
 
     <TextView
         android:id="@+id/tv_studentPay"
-        android:layout_width="350dp"
-        android:layout_height="197dp"
-        android:layout_marginBottom="248dp"
+        android:layout_width="351dp"
+        android:layout_height="231dp"
+        android:layout_marginBottom="244dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Congratulations! You have paid $70.00, and are registered with a student membership at LeGym"
-        android:textAlignment="center"
+        android:text="Congratulations! You have paid $70.00, and are registered with a student membership at LeGym. Your membership expires on:"
+        android:textAlignment="viewStart"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,5 +40,19 @@
         android:layout_marginStart="36dp"
         android:text="Register For Classes"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="292dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="260dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.697"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

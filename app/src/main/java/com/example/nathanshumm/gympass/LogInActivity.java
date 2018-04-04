@@ -75,6 +75,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                                         Toast.makeText(LogInActivity.this, "Log in Successful", Toast.LENGTH_SHORT).show();
                                         Intent mainActivityIntent = new Intent(LogInActivity.this, MainActivity.class);
                                         LogInActivity.this.startActivity(mainActivityIntent);
+                                        LogInActivity.this.finish();
                                     } else {
                                         Log.e("Auth_Err", task.getException().getMessage());
                                         Toast.makeText(LogInActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
