@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Marketplace
+Explore
+ @CheckShumm
+Sign out
+0
+1 1 CheckShumm/GymPass
+ Code  Issues 0  Pull requests 1  Projects 0  Wiki  Insights  Settings
+GymPass/app/src/main/res/layout/activity_fusion.xml
+26636e4  8 minutes ago
+@CheckShumm CheckShumm Fixing Merge Conflicts
+@CheckShumm @Michel09 @jadsleiman
+     
+85 lines (74 sloc)  3.21 KB
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -79,7 +97,3 @@
     app:layout_constraintHorizontal_bias="0.975"
     app:layout_constraintStart_toStartOf="parent" />
 
-
-
-
-</android.support.constraint.ConstraintLayout>
