@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
     private String name;
     private String classes;
     private String membership;
+    private LinearLayout memberInfo;
 
     private Button scannerButton;
     private TextView firstNameTV;
@@ -59,6 +61,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         lastNameTV = (TextView)scannerView.findViewById(R.id.scannerLastName);
         membershipTV = (TextView)scannerView.findViewById(R.id.scannerMembership);
         classesTV = (TextView)scannerView.findViewById(R.id.scannerClasses);
+        memberInfo = (LinearLayout)scannerView.findViewById(R.id.MemberInfoHolder);
 
         // Database
         database = FirebaseDatabase.getInstance();
@@ -155,5 +158,6 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         lastNameTV.setText(lastName);
         membershipTV.setText(membership);
         classesTV.setText(classes);
+        memberInfo.setVisibility(View.VISIBLE);
     }
 }
