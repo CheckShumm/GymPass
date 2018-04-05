@@ -33,7 +33,7 @@ public class fusionActivity extends AppCompatActivity implements View.OnClickLis
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Fusion");
+        toolbar.setTitle("Fusion");
 
         fusButton_a = (Button)findViewById(R.id.fusion_button_pay_A);
         fusButton_b = (Button)findViewById(R.id.fusion_button_pay_B);

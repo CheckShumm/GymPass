@@ -33,7 +33,7 @@ public class zumbaActivity extends AppCompatActivity implements View.OnClickList
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Zumba");
+        toolbar.setTitle("Zumba");
 
         zumbaButton_a = (Button)findViewById(R.id.zumba_button_pay_A);
         zumbaButton_b = (Button)findViewById(R.id.zumba_button_pay_B);
