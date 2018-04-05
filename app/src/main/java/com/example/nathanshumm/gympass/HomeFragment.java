@@ -127,6 +127,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onResume() {
+        if(registered()){
+            registerButton.setVisibility(View.GONE);
+            noRegistrationTV.setVisibility(View.GONE);
+            generateQR();
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onAttach(Context context) {
         if(registered()){
             registerButton.setVisibility(View.GONE);
