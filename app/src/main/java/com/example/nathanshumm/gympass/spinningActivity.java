@@ -1,10 +1,12 @@
 package com.example.nathanshumm.gympass;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class spinningActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar toolbar;
+    private Window window;
 
     private Button spinButton_a;
     private Button spinButton_b;
@@ -34,7 +37,10 @@ public class spinningActivity extends AppCompatActivity implements View.OnClickL
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Spinning");
+        getSupportActionBar().setTitle("Spinning");
+
+        window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
 
         spinButton_a = (Button)findViewById(R.id.spinning_pay_A);
         spinButton_b = (Button)findViewById(R.id.spinning_button_pay_B);
