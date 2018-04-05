@@ -34,7 +34,7 @@ public class spinningActivity extends AppCompatActivity implements View.OnClickL
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Spinning");
+        toolbar.setTitle("Spinning");
 
         spinButton_a = (Button)findViewById(R.id.spinning_pay_A);
         spinButton_b = (Button)findViewById(R.id.spinning_button_pay_B);

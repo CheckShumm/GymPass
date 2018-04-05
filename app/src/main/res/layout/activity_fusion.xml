@@ -8,8 +8,8 @@
     tools:context="com.example.nathanshumm.gympass.classActivity">
 
     <include
-        android:id="@+id/include"
-        layout="@layout/toolbar"></include>
+        layout="@layout/toolbar">
+    </include>
 
 
     <TextView
@@ -80,3 +80,4 @@
     app:layout_constraintStart_toStartOf="parent" />
 
 
+</android.support.constraint.ConstraintLayout>

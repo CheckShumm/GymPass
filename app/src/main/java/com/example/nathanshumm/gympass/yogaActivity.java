@@ -33,7 +33,7 @@ public class yogaActivity extends AppCompatActivity implements View.OnClickListe
 
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Yoga");
+        toolbar.setTitle("Yoga");
 
         yogaButton_a = (Button)findViewById(R.id.yoga_button_pay_A);
         yogaButton_b = (Button)findViewById(R.id.yoga_button_pay_B);
