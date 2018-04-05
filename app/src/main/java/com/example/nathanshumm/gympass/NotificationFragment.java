@@ -68,7 +68,8 @@ public class NotificationFragment extends Fragment {
             }
         });
 
-        delNotifBtn_field = (Button) rootView.findViewById(R.id.delete_button);
+        View fieldView = inflater.inflate(R.layout.field, container, false);
+        delNotifBtn_field = (Button) fieldView.findViewById(R.id.delete_button);
         delNotifBtn_field.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,10 +87,8 @@ public class NotificationFragment extends Fragment {
         notificationFragment = new NotificationFragment();
 
 
-        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
-            Log.e("UID", firebaseUser.getUid().toString());
-            setFragment(notificationFragment);
-        }else {
+        if(!firebaseUser.getUid().toString().contains("T3VGSX7")){
+
             addNotifBtn.setVisibility(View.GONE);
             delNotifBtn.setVisibility(View.GONE);
             delNotifBtn_field.setVisibility(View.GONE);
