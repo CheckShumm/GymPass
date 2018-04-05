@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "323052006743-or6pkcma4cenqagsmvmojgp5jrmvr23b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nathanshumm.gympass",
+            "certificate_hash": "1f77d3edd67817b4d6f0552e0fbc998c5175b761"
+          }
+        },
+        {
           "client_id": "323052006743-nopvb7l5ot6tuaef2fdno3hb2v46ndp2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
