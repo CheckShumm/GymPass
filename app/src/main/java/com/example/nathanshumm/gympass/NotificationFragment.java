@@ -3,11 +3,18 @@ package com.example.nathanshumm.gympass;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.Notification;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
