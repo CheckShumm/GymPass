@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "You cancelled the Scanning!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("SCAN", result.getContents());
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -288,12 +288,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
-                Log.e("firstNameScanner", firstNameScanner);
-                lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
-                membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
-                classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
-                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                if(id.length() == 28){
+                    firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
+                    Log.e("firstNameScanner", firstNameScanner);
+                    lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
+                    membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
+                    classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                    scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                }else{
+
+                }
             }
 
             @Override
@@ -311,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick (DialogInterface dialogInterface, int i){
                 dialogInterface.cancel();
-
             }
         });
 
