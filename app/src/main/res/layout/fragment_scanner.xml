@@ -2,8 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     tools:context="com.example.nathanshumm.gympass.ScannerFragment">
 
+    <include
+        layout="@layout/toolbar">
+    </include>
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,45 +15,56 @@
         android:gravity="center"
         android:orientation="vertical">
         <TextView
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="0dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="QR CODE SCANNER"
-            android:textColor="@color/colorBurgundy"
+            android:textColor="@color/colorWhite"
             android:textStyle="bold"/>
-        <TextView
-            android:id="@+id/scannerFirstName"
-            android:layout_marginTop="30dp"
-            android:text=""
-            android:textSize="25sp"
-            android:textColor="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-        android:id="@+id/scannerLastName"
-        android:text=""
-        android:textSize="25sp"
-        android:textColor="@color/colorPrimary"
-        android:layout_marginTop="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/scannerMembership"
-            android:text=""
-            android:textSize="25sp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/scannerClasses"
-            android:text=""
-            android:textSize="25sp"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/MemberInfoHolder"
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/scannerFirstName"
+                android:text=""
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/scannerLastName"
+                android:text=""
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/scannerMembership"
+                android:text=""
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/scannerClasses"
+                android:text=""
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
 
         <Button
             android:layout_marginTop="50dp"
@@ -60,7 +75,6 @@
             android:textColor="@color/colorWhite"
             android:background="@color/colorBurgundy"
             />
-
     </LinearLayout>
 
 </RelativeLayout>

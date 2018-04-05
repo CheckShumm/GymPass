@@ -4,9 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-feature android:name="android.hardware.camera2" />
+    <uses-feature android:name="android.hardware.camera"
+                    android:required="true"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +29,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".classActivity" />
+        <activity android:name=".ChooseActivity" />
         <activity android:name=".MembershipActivity" />
         <activity android:name=".fusionActivity" />
         <activity android:name=".spinningActivity" />

@@ -82,5 +82,3 @@ public class yogaActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
-
-

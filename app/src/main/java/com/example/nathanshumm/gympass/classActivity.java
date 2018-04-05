@@ -1,10 +1,12 @@
 package com.example.nathanshumm.gympass;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
+import android.view.Window;
 import android.widget.Button;
 
 public class classActivity extends AppCompatActivity implements View.OnClickListener{
@@ -13,12 +15,17 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
     Button button_spin;
     Button button_yoga;
     Button button_zumba;
+
+    private Window window;
     private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class);
+
+        window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

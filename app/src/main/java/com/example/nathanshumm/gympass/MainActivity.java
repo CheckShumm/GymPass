@@ -1,6 +1,7 @@
 package com.example.nathanshumm.gympass;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -181,6 +183,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putString("WORKAROUND_FOR_BUG_19917_KEY", "WORKAROUND_FOR_BUG_19917_VALUE");
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onStart() {
         if(firebaseUser.getUid().toString().contains("T3VGSX7")){
             //Log.e("UID", firebaseUser.getUid().toString());
@@ -256,7 +264,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "You cancelled the Scanning!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("SCAN", result.getContents());
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -281,12 +289,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
-                Log.e("firstNameScanner", firstNameScanner);
-                lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
-                membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
-                classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
-                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                if(id.length() == 28){
+                    firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
+                    Log.e("firstNameScanner", firstNameScanner);
+                    lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
+                    membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
+                    classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                    scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                }else{
+
+                }
             }
 
             @Override
@@ -295,4 +307,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
     }
+
+    public void BackPressed(){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Are you suer you want to exit the application");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick (DialogInterface dialogInterface, int i){
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                finish();
+
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
 }
