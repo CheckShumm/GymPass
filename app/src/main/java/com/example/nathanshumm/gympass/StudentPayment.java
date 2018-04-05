@@ -78,14 +78,6 @@ public class StudentPayment extends AppCompatActivity {
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Expiration").setValue(nextMonthString);
 
 
-        //textDate=(TextView) findViewById(R.id.tv_date);
-        //Calendar cal = Calendar.set(Calendar.SECOND);
-        //Date today = cal.getTime();
-        //cal.add(Calendar.SECOND,40);
-        //Date nextMonth = cal.getTime();
-        //String nextMonthString= DateFormat.getTimeInstance().format(nextMonth);
-        //textDate.setText(nextMonthString);
-
     }
 
 }

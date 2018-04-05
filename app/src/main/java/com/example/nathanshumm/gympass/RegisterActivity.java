@@ -56,6 +56,11 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageView;
     private Window window;
 
+    //Button btnpic;
+    //ImageView imgTakenPic;
+    private static final int CAM_REQUEST=1313;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
         phone = (EditText) findViewById(R.id.et_phoneNmb);
         surname = (EditText) findViewById(R.id.et_surname);
         payButton = (Button) findViewById(R.id.btn_next);
-        final int CAM_REQUEST= 1;
+        //final int CAM_REQUEST= 1;
         imageView= (ImageView) findViewById(R.id.iv_picture);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -92,36 +97,59 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         photoButton = (Button) findViewById(R.id.btn_picture);
+        photoButton.setOnClickListener(new btnTakePhotoClicker());
 
-        photoButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick (View v){
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file =getFile();
-                camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(camera_intent,CAM_REQUEST);
-            }
-        });
+
+
+      //  photoButton.setOnClickListener(new View.OnClickListener(){
+        //    @Override
+          //  public void onClick (View v){
+            //    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+              //  File file =getFile();
+                //camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+               // startActivityForResult(camera_intent,CAM_REQUEST);
+       //     }
+       // });
     }
-
-    private File getFile(){
-        File folder= new File ("sdcard/camera_app");
-
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-
-        File image_file = new File(folder,"cam_image.jpg");
-        return image_file;
-    }
-
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        String path = "sdcard/camera_app/cam_image.jpg";
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        imageView.setImageDrawable(Drawable.createFromPath(path));
+        if(requestCode == CAM_REQUEST){
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+            //   Bitmap resized = Bitmap.createScaledBitmap(bitmap, 150, 150, true);
+            imageView.setImageBitmap(bitmap);
+        }
     }
+
+    class btnTakePhotoClicker implements  Button.OnClickListener{
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(intent,CAM_REQUEST);
+        }
+    }
+
+    //private File getFile(){
+    //    File folder= new File ("sdcard/camera_app");
+
+    //    if(!folder.exists()){
+    //        folder.mkdir();
+    //    }
+
+    //    File image_file = new File(folder,"cam_image.jpg");
+    //    return image_file;
+   // }
+
+
+   // @Override
+  //  protected void onActivityResult(int requestCode, int resultCode, Intent data){
+  //      String path = "sdcard/camera_app/cam_image.jpg";
+
+//        imageView.setImageDrawable(Drawable.createFromPath(path));
+ //   }
 
     public void register() {
         initialize();
@@ -163,11 +191,11 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
 
-        if (imageView.getDrawable()==null){
-            Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
-            valid=false;
+       // if (imageView.getDrawable()==null){
+       //     Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
+        //    valid=false;
 
-        }
+      //  }
 
 
         return valid;
