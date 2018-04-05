@@ -30,7 +30,7 @@ public class MembershipActivity extends AppCompatActivity {
     Button seniorButton;
     Button publicButton;
     private String expiry = "none";
-    //TextView textDate;
+
 
     // Database instance
     private FirebaseDatabase database;
@@ -106,7 +106,7 @@ public class MembershipActivity extends AppCompatActivity {
         Date today = cal.getTime();
         cal.add(Calendar.MONTH,0);
         Date nextMonth = cal.getTime();
-        String nextMonthString= DateFormat.getDateInstance().format(nextMonth);
+        String todayString= DateFormat.getDateInstance().format(nextMonth);
 
 
 
@@ -139,28 +139,15 @@ public class MembershipActivity extends AppCompatActivity {
         };
         databaseReference.addChildEventListener(childEventListener);
 
-        if(expiry != nextMonthString){
-            Toast.makeText(MembershipActivity.this, "You already a member", Toast.LENGTH_LONG).show();
+        if(expiry != todayString){
+
+            Toast.makeText(MembershipActivity.this, "You are already a member", Toast.LENGTH_LONG).show();
+            studentButton.setEnabled(false);
+            seniorButton.setEnabled(false);
+            publicButton.setEnabled(false);
+            staffButton.setEnabled(false);
         }
 
 
-
-
-
-        //DateFormat newDate = new SimpleDateFormat("MM/dd/yyyy");
-        //Date date = new Date ();
-        //startDate = newDate.format(date);
-/*
-        textDate=(TextView) findViewById(R.id.tv_date);
-      //  String currentDateTimeString = DateFormat.getDateTimeInstance().format(new Date());
-      // textDate.setText(currentDateTimeString);
-
-        Calendar cal = Calendar.getInstance();
-        Date today = cal.getTime();
-        cal.add(Calendar.MONTH,4);
-        Date nextMonth = cal.getTime();
-        String nextMonthString= DateFormat.getDateInstance().format(nextMonth);
-        textDate.setText(nextMonthString);
-  */
     }
 }
