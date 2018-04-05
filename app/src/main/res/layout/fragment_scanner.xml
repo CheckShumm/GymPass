@@ -5,6 +5,9 @@
     android:background="@color/colorAccent"
     tools:context="com.example.nathanshumm.gympass.ScannerFragment">
 
+    <include
+        layout="@layout/toolbar">
+    </include>
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
