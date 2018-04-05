@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -56,6 +58,12 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageView;
     private Window window;
 
+    //Button btnpic;
+    //ImageView imgTakenPic;
+    private static final int REQUEST_IMAGE_CAPTURE = 1;
+    private static final int CAM_REQUEST=1313;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,12 +77,14 @@ public class RegisterActivity extends AppCompatActivity {
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+
         email = (EditText) findViewById(R.id.et_email);
         name = (EditText) findViewById(R.id.et_name);
         phone = (EditText) findViewById(R.id.et_phoneNmb);
         surname = (EditText) findViewById(R.id.et_surname);
         payButton = (Button) findViewById(R.id.btn_next);
-        final int CAM_REQUEST= 1;
+        //final int CAM_REQUEST= 1;
         imageView= (ImageView) findViewById(R.id.iv_picture);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -92,36 +102,79 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         photoButton = (Button) findViewById(R.id.btn_picture);
-
         photoButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick (View v){
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file =getFile();
-                camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-                startActivityForResult(camera_intent,CAM_REQUEST);
+            public void onClick(View view) {
+                activeTakePhoto();
             }
         });
+
+
+
+      //  photoButton.setOnClickListener(new View.OnClickListener(){
+        //    @Override
+          //  public void onClick (View v){
+            //    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+              //  File file =getFile();
+                //camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+               // startActivityForResult(camera_intent,CAM_REQUEST);
+       //     }
+       // });
     }
-
-    private File getFile(){
-        File folder= new File ("sdcard/camera_app");
-
-        if(!folder.exists()){
-            folder.mkdir();
-        }
-
-        File image_file = new File(folder,"cam_image.jpg");
-        return image_file;
-    }
-
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        String path = "sdcard/camera_app/cam_image.jpg";
-
-        imageView.setImageDrawable(Drawable.createFromPath(path));
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageView.setImageBitmap(imageBitmap);
+            imageView.setRotation(90);
     }
+
+
+    private void activeTakePhoto() {
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 110);
+        } else {
+            takePicture();
+        }
+
+    }
+
+    public void takePicture() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 22);
+        Log.e("CAM", "Camera Check1");
+
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 110) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                takePicture();
+            }
+        }}
+
+    //private File getFile(){
+    //    File folder= new File ("sdcard/camera_app");
+
+    //    if(!folder.exists()){
+    //        folder.mkdir();
+    //    }
+
+    //    File image_file = new File(folder,"cam_image.jpg");
+    //    return image_file;
+   // }
+
+
+   // @Override
+  //  protected void onActivityResult(int requestCode, int resultCode, Intent data){
+  //      String path = "sdcard/camera_app/cam_image.jpg";
+
+//        imageView.setImageDrawable(Drawable.createFromPath(path));
+ //   }
 
     public void register() {
         initialize();
@@ -163,11 +216,11 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
 
-        if (imageView.getDrawable()==null){
-            Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
-            valid=false;
+       // if (imageView.getDrawable()==null){
+       //     Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
+        //    valid=false;
 
-        }
+      //  }
 
 
         return valid;
