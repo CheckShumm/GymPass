@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private Window window;
 
+
     private TextView navFirstname;
     private TextView navSurname;
     private TextView navEmail;
@@ -113,14 +114,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         notificationFragment = new NotificationFragment();
         activityFragment = new ActivityFragment();
         Log.e("UID",firebaseUser.getUid().toString());
-
         if(firebaseUser.getUid().toString().contains("T3VGSX7")){
             Log.e("UID", firebaseUser.getUid().toString());
             setFragment(scannerFragment);
         }else {
             setFragment(homeFragment);
         }
-
         mainFrame = (FrameLayout)findViewById(R.id.m_Frame);
         mBottomNav = (BottomNavigationView)findViewById(R.id.m_navBar);
 
@@ -130,7 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (item.getItemId()){
 
                     case R.id.nav_home:
-                        setFragment(homeFragment);
+                        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+                            Log.e("UID", firebaseUser.getUid().toString());
+                            setFragment(scannerFragment);
+                        }else {
+                            setFragment(homeFragment);
+                        }
                         return true;
                     case R.id.nav_activity:
                         setFragment(activityFragment);
@@ -197,6 +201,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             setFragment(homeFragment);
         }
         super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+            //Log.e("UID", firebaseUser.getUid().toString());
+            setFragment(scannerFragment);
+        }else {
+            setFragment(homeFragment);
+        }
+        super.onResume();
     }
 
     @Override
@@ -269,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.e("SCAN", result.getContents());
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 displayInfo(result.getContents());
-                //scannerFragment.setNameTextView(result.getContents());
+                databaseReference.child("DoorStatus").setValue(1);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -295,6 +310,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
                     membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
                     classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                    //databaseReference.child("DoorStatus").setValue(1);
                     scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
                 }else{
 
