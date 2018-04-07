@@ -34,8 +34,10 @@ public class MembershipActivity extends AppCompatActivity {
     Button staffButton;
     Button seniorButton;
     Button publicButton;
+
     private Window window;
     private Toolbar toolbar;
+
     private Date expireDate;
     private String expiry = "Aug 5, 2020";
     private Date nextMonth;
