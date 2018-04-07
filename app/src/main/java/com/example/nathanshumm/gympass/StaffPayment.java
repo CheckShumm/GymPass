@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -25,6 +26,7 @@ public class StaffPayment extends AppCompatActivity {
 
     // Database instance
     private Window window;
+    private Toolbar toolbar;
 
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -40,6 +42,9 @@ public class StaffPayment extends AppCompatActivity {
 
         window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Faculty & Staff Payment");
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
