@@ -15,7 +15,7 @@ public class SpinningPaymentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinning_payment);
 
-        doneButton=(Button)findViewById(R.id.yoga_btn_done);
+        doneButton=(Button)findViewById(R.id.spinning_btn_done);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -25,7 +25,7 @@ public class SpinningPaymentActivity extends AppCompatActivity {
 
             }
         });
-        regisClassButton=(Button)findViewById(R.id.yoga_btn_registClass);
+        regisClassButton=(Button)findViewById(R.id.spinning_btn_registClass);
 
         regisClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
