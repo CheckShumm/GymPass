@@ -71,18 +71,18 @@ public class zumbaActivity extends AppCompatActivity implements View.OnClickList
         switch(v.getId()){
             case R.id.zumba_button_pay_A:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Zumba");
-                Intent yogaIntent_a = new Intent(zumbaActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_a);
+                Intent zumbaIntent_a = new Intent(zumbaActivity.this, ZumbaPaymentActivity.class);
+                startActivity(zumbaIntent_a);
                 break;
             case R.id.zumba_button_pay_B:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Zumba");
-                Intent yogaIntent_b = new Intent(zumbaActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_b);
+                Intent zumbaIntent_b = new Intent(zumbaActivity.this, ZumbaPaymentActivity.class);
+                startActivity(zumbaIntent_b);
                 break;
             case R.id.zumba_button_pay_C:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Zumba");
-                Intent yogaIntent_c = new Intent(zumbaActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_c);
+                Intent zumbaIntent_c = new Intent(zumbaActivity.this, ZumbaPaymentActivity.class);
+                startActivity(zumbaIntent_c);
                 break;
 
         }

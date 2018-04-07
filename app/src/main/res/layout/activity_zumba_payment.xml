@@ -25,22 +25,24 @@
         android:id="@+id/zumba_btn_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Done"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/zumba_btn_registClass" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/zumba_btn_registClass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:layout_marginStart="36dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:text="Register for more classes"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/zumba_btn_done"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
 
