@@ -176,9 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         };
 
-
         databaseReference.addChildEventListener(childEventListener);
-
 
     }
 
@@ -295,6 +293,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
                     membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
                     classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                    databaseReference.child("DoorStatus").setValue(1);
                     scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
                 }else{
 
