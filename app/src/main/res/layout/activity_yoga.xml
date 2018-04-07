@@ -27,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
         app:layout_constraintVertical_bias="0.427" />
 
     <ImageView
@@ -50,42 +49,41 @@
         android:layout_width="36dp"
         android:layout_height="13dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="384dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/join_class_button"
         android:textSize="8sp"
         app:layout_constraintBottom_toTopOf="@+id/yoga_button_pay_B"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/yoga_button_pay_B"
         android:layout_width="36dp"
         android:layout_height="13dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/join_class_button"
         android:textSize="8sp"
+        app:layout_constraintBottom_toTopOf="@+id/yoga_button_pay_C"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="433dp" />
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/yoga_button_pay_C"
         android:layout_width="36dp"
         android:layout_height="13dp"
-        android:layout_marginBottom="100dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="104dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/join_class_button"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yoga_button_pay_B" />
-
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 

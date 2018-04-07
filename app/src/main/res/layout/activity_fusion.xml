@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/textView_fusion"
-        android:layout_width="292dp"
+        android:layout_width="wrap_content"
         android:layout_height="138dp"
         android:layout_marginBottom="288dp"
         android:layout_marginEnd="8dp"
@@ -30,7 +30,7 @@
 
     <ImageView
         android:id="@+id/imageView_fusion"
-        android:layout_width="377dp"
+        android:layout_width="wrap_content"
         android:layout_height="196dp"
         android:layout_marginBottom="56dp"
         android:layout_marginEnd="8dp"
@@ -41,43 +41,40 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/fusion_button_pay_A"
         android:layout_width="37dp"
         android:layout_height="13dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/join_class_button"
         android:textSize="8sp"
         app:layout_constraintBottom_toTopOf="@+id/fusion_button_pay_B"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
-    app:layout_constraintHorizontal_bias="0.975"
-    app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <Button
         android:id="@+id/fusion_button_pay_B"
-        android:layout_width="36dp"
-        android:layout_height="13dp"
-        android:layout_marginBottom="120dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="37dp"
+        android:layout_height="14dp"
+        android:layout_marginBottom="136dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:background="?android:attr/colorAccent"
         android:text="@string/join_class_button"
         android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.975"
-    app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

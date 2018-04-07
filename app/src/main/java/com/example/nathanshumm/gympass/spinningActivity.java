@@ -75,23 +75,23 @@ public class spinningActivity extends AppCompatActivity implements View.OnClickL
         switch(v.getId()){
             case R.id.spinning_pay_A:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Spinning");
-                Intent yogaIntent_a = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_a);
+                Intent spinIntent_a = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
+                startActivity(spinIntent_a);
                 break;
             case R.id.spinning_button_pay_B:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Spinning");
-                Intent yogaIntent_b = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_b);
+                Intent spinIntent_b = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
+                startActivity(spinIntent_b);
                 break;
             case R.id.spinning_button_pay_C:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Spinning");
-                Intent yogaIntent_c = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_c);
+                Intent spinIntent_c = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
+                startActivity(spinIntent_c);
                 break;
             case R.id.spinning_button_pay_D:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Spinning");
-                Intent yogaIntent_d = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
-                startActivity(yogaIntent_d);
+                Intent spinIntent_d = new Intent(spinningActivity.this, SpinningPaymentActivity.class);
+                startActivity(spinIntent_d);
                 break;
         }
     }
