@@ -129,7 +129,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 switch (item.getItemId()){
 
                     case R.id.nav_home:
-                        setFragment(homeFragment);
+                        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+                            Log.e("UID", firebaseUser.getUid().toString());
+                            setFragment(scannerFragment);
+                        }else {
+                            setFragment(homeFragment);
+                        }
                         return true;
                     case R.id.nav_activity:
                         setFragment(activityFragment);
@@ -199,6 +204,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    protected void onResume() {
+        if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+            //Log.e("UID", firebaseUser.getUid().toString());
+            setFragment(scannerFragment);
+        }else {
+            setFragment(homeFragment);
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -263,12 +279,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "You cancelled the Scanning!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("SCAN", result.getContents());
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 displayInfo(result.getContents());
-                //scannerFragment.setNameTextView(result.getContents());
+                databaseReference.child("DoorStatus").setValue(1);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -288,12 +304,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
-                Log.e("firstNameScanner", firstNameScanner);
-                lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
-                membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
-                classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
-                scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                if(id.length() == 28){
+                    firstNameScanner = dataSnapshot.child("Users").child(id).child("Name").getValue(String.class);
+                    Log.e("firstNameScanner", firstNameScanner);
+                    lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
+                    membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
+                    classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
+                    //databaseReference.child("DoorStatus").setValue(1);
+                    scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                }else{
+
+                }
             }
 
             @Override
@@ -311,7 +332,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick (DialogInterface dialogInterface, int i){
                 dialogInterface.cancel();
-
             }
         });
 

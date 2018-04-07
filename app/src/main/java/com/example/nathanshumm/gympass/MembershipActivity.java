@@ -93,7 +93,6 @@ public class MembershipActivity extends AppCompatActivity {
 
         publicButton=(Button)findViewById(R.id.btn_public);
 
-
         publicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

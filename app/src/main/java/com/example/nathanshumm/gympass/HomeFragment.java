@@ -49,8 +49,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private LinearLayout qrLayout;
     private Button registerButton;
     private Button qrGenButton;
+
     private ImageView qrCodeImage;
     private int qrCounter = 0;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -124,6 +126,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 //        }
 
         return homeView;
+    }
+
+    @Override
+    public void onResume() {
+        if(registered()){
+            registerButton.setVisibility(View.GONE);
+            noRegistrationTV.setVisibility(View.GONE);
+            generateQR();
+        }
+        super.onResume();
     }
 
     @Override

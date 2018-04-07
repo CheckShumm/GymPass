@@ -45,67 +45,57 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.973" />
 
-    <Button
-        android:id="@+id/spinning_pay_A"
-        android:layout_width="36dp"
-        android:layout_height="13dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="?android:attr/colorAccent"
-        android:text="@string/join_class_button"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinning_button_pay_B"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/spinning_button_pay_B"
-        android:layout_width="35dp"
-        android:layout_height="13dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="?android:attr/colorAccent"
-        android:text="@string/join_class_button"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinning_button_pay_C"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.976"
-        app:layout_constraintStart_toStartOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <Button
-        android:id="@+id/spinning_button_pay_C"
-        android:layout_width="36dp"
-        android:layout_height="13dp"
-        android:layout_marginBottom="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="?android:attr/colorAccent"
-        android:text="@string/join_class_button"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toTopOf="@+id/spinning_button_pay_D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/spinning_pay_A"
+            android:layout_width="36dp"
+            android:layout_height="13dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="148dp"
+            android:layout_marginEnd="20dp"
+            android:background="?android:attr/colorAccent"
+            android:text="@string/join_class_button"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/spinning_button_pay_B"
+            android:layout_width="36dp"
+            android:layout_height="13dp"
+            android:layout_alignStart="@+id/spinning_pay_A"
+            android:layout_alignTop="@+id/spinning_pay_A"
+            android:layout_marginTop="19dp"
+            android:background="?android:attr/colorAccent"
+            android:text="@string/join_class_button"
+            android:textSize="8sp" />
+
+        <Button
+            android:id="@+id/spinning_button_pay_C"
+            android:layout_width="36dp"
+            android:layout_height="13dp"
+            android:layout_alignStart="@+id/spinning_button_pay_B"
+            android:layout_below="@+id/spinning_button_pay_B"
+            android:background="?android:attr/colorAccent"
+            android:text="@string/join_class_button"
+            android:textSize="8sp" />
 
 
-    <Button
-        android:id="@+id/spinning_button_pay_D"
-        android:layout_width="36dp"
-        android:layout_height="10dp"
-        android:layout_marginBottom="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:background="?android:attr/colorAccent"
-        android:text="@string/join_class_button"
-        android:textSize="8sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.975"
-        app:layout_constraintStart_toStartOf="parent" />
+        <Button
+            android:id="@+id/spinning_button_pay_D"
+            android:layout_width="36dp"
+            android:layout_height="13dp"
+            android:layout_alignStart="@+id/spinning_button_pay_C"
+            android:layout_below="@+id/spinning_button_pay_C"
+            android:background="?android:attr/colorAccent"
+            android:text="@string/join_class_button"
+            android:textSize="8sp" />
+
+    </RelativeLayout>
 
 
 
