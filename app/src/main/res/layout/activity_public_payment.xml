@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.nathanshumm.gympass.PublicPayment">
 
+    <include
+        layout="@layout/toolbar">
+    </include>
+
     <TextView
         android:id="@+id/tv_publicPay"
         android:layout_width="350dp"
