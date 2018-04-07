@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,7 +30,9 @@ public class MembershipActivity extends AppCompatActivity {
     Button staffButton;
     Button seniorButton;
     Button publicButton;
-    private String expiry = "none";
+    private Date expireDate;
+    private String expiry = "Aug 5, 2020";
+    private Date nextMonth;
 
 
     // Database instance
@@ -104,7 +107,7 @@ public class MembershipActivity extends AppCompatActivity {
         Calendar cal = Calendar.getInstance();
         Date today = cal.getTime();
         cal.add(Calendar.MONTH,0);
-        Date nextMonth = cal.getTime();
+        nextMonth = cal.getTime();
         String todayString= DateFormat.getDateInstance().format(nextMonth);
 
 
@@ -114,6 +117,12 @@ public class MembershipActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Log.e("HERE", "test");
                 expiry = dataSnapshot.child(firebaseUser.getUid()).child("Expiration").getValue(String.class);
+                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy");
+                try {
+                    expireDate = sdf.parse(expiry);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
@@ -138,7 +147,7 @@ public class MembershipActivity extends AppCompatActivity {
         };
         databaseReference.addChildEventListener(childEventListener);
 
-        if(expiry != todayString){
+        if(expireDate.after(nextMonth)){
 
             Toast.makeText(MembershipActivity.this, "You are already a member", Toast.LENGTH_LONG).show();
             studentButton.setEnabled(false);

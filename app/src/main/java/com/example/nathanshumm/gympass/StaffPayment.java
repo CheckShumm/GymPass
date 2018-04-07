@@ -7,12 +7,31 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class StaffPayment extends AppCompatActivity {
 
     Button doneButton;
     Button regisClassButton;
+
+    // Database instance
     private Window window;
+
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+
+    static TextView textDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +40,10 @@ public class StaffPayment extends AppCompatActivity {
 
         window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        firebaseAuth = firebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         doneButton = (Button) findViewById(R.id.btn_done);
 
@@ -42,5 +65,16 @@ public class StaffPayment extends AppCompatActivity {
 
             }
         });
+        textDate=(TextView) findViewById(R.id.tv_date);
+        Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
+        cal.add(Calendar.MONTH,4);
+        Date nextMonth = cal.getTime();
+        String nextMonthString= DateFormat.getDateInstance().format(nextMonth);
+        textDate.setText(nextMonthString);
+
+
+        databaseReference.child("Users").child(firebaseUser.getUid()).child("Expiration").setValue(nextMonthString);
+
     }
 }
