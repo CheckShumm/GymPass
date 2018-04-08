@@ -27,13 +27,19 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 import javax.microedition.khronos.egl.EGL;
@@ -53,6 +59,10 @@ public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
+    private StorageReference profileRef;
+
     private Button payButton;
     private Button photoButton;
     private ImageView imageView;
@@ -75,9 +85,12 @@ public class RegisterActivity extends AppCompatActivity {
         // Database
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
+        profileRef = storageReference.child(firebaseUser.getUid());
 
         email = (EditText) findViewById(R.id.et_email);
         name = (EditText) findViewById(R.id.et_name);
@@ -111,15 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
 
-      //  photoButton.setOnClickListener(new View.OnClickListener(){
-        //    @Override
-          //  public void onClick (View v){
-            //    Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-              //  File file =getFile();
-                //camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-               // startActivityForResult(camera_intent,CAM_REQUEST);
-       //     }
-       // });
+
     }
 
     @Override
@@ -127,7 +132,30 @@ public class RegisterActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(imageBitmap);
-            imageView.setRotation(90);
+            imageView.setRotation(270);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] byteData = baos.toByteArray();
+        UploadTask uploadTask = profileRef.putBytes(byteData);
+
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Log.e("Upload", "uploading image");
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                SharedPreferences sharedPreferences = getSharedPreferences("profile", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("profileKey",downloadUrl.toString());
+                editor.apply();
+            }
+        });
+
     }
 
 
@@ -157,24 +185,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         }}
 
-    //private File getFile(){
-    //    File folder= new File ("sdcard/camera_app");
-
-    //    if(!folder.exists()){
-    //        folder.mkdir();
-    //    }
-
-    //    File image_file = new File(folder,"cam_image.jpg");
-    //    return image_file;
-   // }
-
-
-   // @Override
-  //  protected void onActivityResult(int requestCode, int resultCode, Intent data){
-  //      String path = "sdcard/camera_app/cam_image.jpg";
-
-//        imageView.setImageDrawable(Drawable.createFromPath(path));
- //   }
 
     public void register() {
         initialize();
@@ -190,6 +200,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onSignupSuccess(){
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
+
         Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
         startActivity (i);
         finish();

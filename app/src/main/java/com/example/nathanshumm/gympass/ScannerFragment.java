@@ -2,6 +2,7 @@ package com.example.nathanshumm.gympass;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,9 +14,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -38,18 +43,21 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
-
     private String surname;
     private String name;
     private String classes;
     private String membership;
+    private ImageView scannerProfileImage;
     private LinearLayout memberInfo;
+
+    private SharedPreferences sharedPreferences;
 
     private Button scannerButton;
     private TextView firstNameTV;
     private TextView lastNameTV;
     private TextView membershipTV;
     private TextView classesTV;
+    private Space scannerSpace;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,12 +70,17 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         membershipTV = (TextView)scannerView.findViewById(R.id.scannerMembership);
         classesTV = (TextView)scannerView.findViewById(R.id.scannerClasses);
         memberInfo = (LinearLayout)scannerView.findViewById(R.id.MemberInfoHolder);
+        scannerSpace = (Space)scannerView.findViewById(R.id.scannerSpace);
+        scannerProfileImage = (ImageView)scannerView.findViewById(R.id.scannerImage);
+
 
         // Database
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+        sharedPreferences = this.getActivity().getSharedPreferences("profile", Context.MODE_PRIVATE);
 
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -158,6 +171,14 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         lastNameTV.setText(lastName);
         membershipTV.setText(membership);
         classesTV.setText(classes);
+        scannerSpace.setVisibility(View.GONE);
         memberInfo.setVisibility(View.VISIBLE);
+        scannerSpace.setVisibility(View.GONE);
+
+        String URL = sharedPreferences.getString("profileKey",null);
+        if(URL != "profileKey" || URL != null) {
+            Picasso.with(this.getActivity()).load(URL).fit().centerCrop().into(scannerProfileImage);
+            scannerProfileImage.setRotation(270);
+        }
     }
 }
