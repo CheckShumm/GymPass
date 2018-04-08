@@ -10,6 +10,7 @@
     <string name="surnameKey">surnameKey</string>
     <string name="emailKey">emailKey</string>
     <string name="title_activity_membership">MembershipActivity</string>
+    <string name="profileKey">profileKey</string>
 
     //Class activity strings
     <string name="Zumba">Zumba</string>

@@ -24,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private TextView navFirstname;
     private TextView navSurname;
     private TextView navEmail;
+    private ImageView navProfileImage;
     private BottomNavigationView mBottomNav;
     private FrameLayout mainFrame;
 
@@ -78,6 +81,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String lastNameScanner;
     private String classesScanner;
     private String membershipScanner;
+
+    private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        sharedPreferences = getSharedPreferences("profile", Context.MODE_PRIVATE);
 
         firstNameTV = (TextView)findViewById(R.id.scannerFirstName);
         lastNameTV = (TextView)findViewById(R.id.scannerLastName);
@@ -231,11 +238,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navFirstname = (TextView)hview.findViewById(R.id.navDrawerName);
         navSurname = (TextView)hview.findViewById(R.id.navDrawerSurname);
         navEmail = (TextView)hview.findViewById(R.id.navDrawerEmail);
-        Log.e("checkname","this is nam1: "+ name);
-        if(name != null){
-            navFirstname.setText(name);
-            navSurname.setText(surname);
-            navEmail.setText(email);
+        navProfileImage = (ImageView)hview.findViewById(R.id.navProfileImage);
+
+        String URL = sharedPreferences.getString("profileKey",null);
+        if(URL != "profileKey" || URL != null) {
+            Picasso.with(MainActivity.this).load(URL).fit().centerCrop().into(navProfileImage);
+            navProfileImage.setRotation(270);
+            if (name != null) {
+                navFirstname.setText(name);
+                navSurname.setText(surname);
+                navEmail.setText(email);
+            }
         }
     }
 
@@ -326,7 +339,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void BackPressed(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Are you suer you want to exit the application");
+        builder.setMessage("Are you sure you want to exit the application");
         builder.setCancelable(true);
         builder.setNegativeButton("Yes", new DialogInterface.OnClickListener(){
             @Override
