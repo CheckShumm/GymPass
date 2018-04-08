@@ -72,13 +72,13 @@ public class fusionActivity extends AppCompatActivity implements View.OnClickLis
         switch(v.getId()){
             case R.id.fusion_button_pay_A:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Fusion");
-                Intent yogaIntent_a = new Intent(fusionActivity.this, FusionPaymentActivity.class);
-                startActivity(yogaIntent_a);
+                Intent fusIntent_a = new Intent(fusionActivity.this, FusionPaymentActivity.class);
+                startActivity(fusIntent_a);
                 break;
             case R.id.fusion_button_pay_B:
                 databaseReference.child("Users").child(firebaseUser.getUid()).child("Classes").setValue("Fusion");
-                Intent yogaIntent_b = new Intent(fusionActivity.this, FusionPaymentActivity.class);
-                startActivity(yogaIntent_b);
+                Intent fusIntent_b = new Intent(fusionActivity.this, FusionPaymentActivity.class);
+                startActivity(fusIntent_b);
                 break;
         }
     }

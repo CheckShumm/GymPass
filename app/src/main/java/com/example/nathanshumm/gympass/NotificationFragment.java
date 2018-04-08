@@ -1,26 +1,16 @@
 package com.example.nathanshumm.gympass;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.Notification;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-
+import android.widget.Spinner;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -29,20 +19,17 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NotificationFragment extends Fragment {
 
     LinearLayout parentLinearLayout;
+    LinearLayout notificationLayout;
 
     Button addNotifBtn;
-    Button delNotifBtn;
-    Button delNotifBtn_field;
+    //Button delNotifBtn;
+    //Button delNotifBtn_field;
 
     // Database instance
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-
-    // Fragments
-    private NotificationFragment notificationFragment;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +38,7 @@ public class NotificationFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_notification, container, false);
 
         parentLinearLayout = (LinearLayout)rootView.findViewById(R.id.parent_linear_layout);
+        //notificationLayout = (LinearLayout)rootView.findViewById(R.id.notif_field);
 
         addNotifBtn = (Button) rootView.findViewById(R.id.add_notification_button);
         addNotifBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,38 +48,29 @@ public class NotificationFragment extends Fragment {
             }
         });
 
-        delNotifBtn = (Button) rootView.findViewById(R.id.delete_notification_button);
-        delNotifBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDelete(view);
-            }
-        });
-
-        View fieldView = inflater.inflate(R.layout.field, container, false);
-        delNotifBtn_field = (Button) fieldView.findViewById(R.id.delete_button);
-        delNotifBtn_field.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onDelete(view);
-            }
-        });
-
-
         // Database
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        notificationFragment = new NotificationFragment();
+        //notificationFragment = new NotificationFragment();
 
+        final EditText notif_text = (EditText) rootView.findViewById(R.id.number_edit_text);
+        final Spinner notif_spinner = (Spinner) rootView.findViewById(R.id.type_spinner);
 
         if(!firebaseUser.getUid().toString().contains("T3VGSX7")){
 
             addNotifBtn.setVisibility(View.GONE);
-            delNotifBtn.setVisibility(View.GONE);
-            delNotifBtn_field.setVisibility(View.GONE);
+            //delNotifBtn.setVisibility(View.GONE);
+            //delNotifBtn_field.setVisibility(View.GONE);
+
+            notif_text.setInputType(InputType.TYPE_NULL);
+            notif_text.setKeyListener(null);
+
+            notif_spinner.setEnabled(false);
+            notif_spinner.setClickable(false);
+
         }
 
         return rootView;
@@ -101,19 +80,7 @@ public class NotificationFragment extends Fragment {
     public void onAdd(View v) {
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewRow = inflater.inflate(R.layout.field, null);
-        parentLinearLayout.addView(viewRow, parentLinearLayout.getChildCount() - 1);
-    }
-
-    public void onDelete(View v) {
-        Log.e("DeleteBtn", "Enter OnDelete Function");
-        parentLinearLayout.removeView((View) v.getParent());
-    }
-
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.m_Frame, fragment);
-        fragmentTransaction.commit();
+        parentLinearLayout.addView(viewRow, parentLinearLayout.getChildCount()-1);
     }
 
 }
