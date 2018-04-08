@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -11,6 +12,8 @@ import android.widget.Button;
 public class PublicPayment extends AppCompatActivity {
 
     private Window window;
+    private Toolbar toolbar;
+
     Button doneButton;
     Button regisClassButton;
     @Override
@@ -20,6 +23,9 @@ public class PublicPayment extends AppCompatActivity {
 
         window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Public Payment");
 
         doneButton=(Button)findViewById(R.id.btn_done);
         doneButton.setOnClickListener(new View.OnClickListener() {

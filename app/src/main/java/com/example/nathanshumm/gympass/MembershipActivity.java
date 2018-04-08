@@ -1,10 +1,13 @@
 package com.example.nathanshumm.gympass;
 
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -30,6 +34,10 @@ public class MembershipActivity extends AppCompatActivity {
     Button staffButton;
     Button seniorButton;
     Button publicButton;
+
+    private Window window;
+    private Toolbar toolbar;
+
     private Date expireDate;
     private String expiry = "Aug 5, 2020";
     private Date nextMonth;
@@ -47,6 +55,13 @@ public class MembershipActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_membership);
 
+
+        window = this.getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
+
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Membership");
 
 
         // Database
@@ -103,6 +118,22 @@ public class MembershipActivity extends AppCompatActivity {
             }
         });
 
+        setExpiration();
+        if(expiry != "Aug 5, 2020") {
+            if (expireDate.after(nextMonth)) {
+
+                Toast.makeText(MembershipActivity.this, "You are already a member", Toast.LENGTH_LONG).show();
+                studentButton.setEnabled(false);
+                seniorButton.setEnabled(false);
+                publicButton.setEnabled(false);
+                staffButton.setEnabled(false);
+            }
+        }
+
+    }
+
+    public void setExpiration(){
+
 
         Calendar cal = Calendar.getInstance();
         Date today = cal.getTime();
@@ -110,13 +141,16 @@ public class MembershipActivity extends AppCompatActivity {
         nextMonth = cal.getTime();
         String todayString= DateFormat.getDateInstance().format(nextMonth);
 
-
-
-        ChildEventListener childEventListener = new ChildEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.e("HERE", "test");
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e("HERE132", "test");
+                Log.e("EXPIRE123", expiry);
                 expiry = dataSnapshot.child(firebaseUser.getUid()).child("Expiration").getValue(String.class);
+                if (expiry == null) {
+                    expiry = "Aug 5, 2020";
+                }
+                Log.e("EXPIRE", expiry);
                 SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy");
                 try {
                     expireDate = sdf.parse(expiry);
@@ -125,37 +159,11 @@ public class MembershipActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        };
-        databaseReference.addChildEventListener(childEventListener);
-
-        if(expireDate.after(nextMonth)){
-
-            Toast.makeText(MembershipActivity.this, "You are already a member", Toast.LENGTH_LONG).show();
-            studentButton.setEnabled(false);
-            seniorButton.setEnabled(false);
-            publicButton.setEnabled(false);
-            staffButton.setEnabled(false);
-        }
-
-
+        });
     }
 }
