@@ -165,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.e("check", "uid: " + firebaseUser.getUid() + " \n" + name );
                 surname = dataSnapshot.child(firebaseUser.getUid()).child("Surname").getValue(String.class);
                 email = dataSnapshot.child(firebaseUser.getUid()).child("Email").getValue(String.class);
+                downloadURL = dataSnapshot.child(firebaseUser.getUid()).child("profileURL").getValue(String.class);
                 setNavDrawer();
             }
 
@@ -231,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             super.onBackPressed();
         }
+        BackPressed();
     }
 
 
@@ -242,11 +244,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navEmail = (TextView)hview.findViewById(R.id.navDrawerEmail);
         navProfileImage = (ImageView)hview.findViewById(R.id.navProfileImage);
 
-        String URL = sharedPreferences.getString("profileKey",null);
-        if(URL != "profileKey" || URL != null) {
-            Picasso.with(MainActivity.this).load(URL).fit().centerCrop().into(navProfileImage);
+        //String URL = sharedPreferences.getString("profileKey",null);
+        if(downloadURL != "profileKey" || downloadURL != null) {
+            Picasso.with(MainActivity.this).load(downloadURL).fit().centerCrop().into(navProfileImage);
             navProfileImage.setRotation(270);
             if (name != null) {
+                homeFragment.userRegistered(name);
+                setFragment(homeFragment);
                 navFirstname.setText(name);
                 navSurname.setText(surname);
                 navEmail.setText(email);
@@ -362,5 +366,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
+
 
 }

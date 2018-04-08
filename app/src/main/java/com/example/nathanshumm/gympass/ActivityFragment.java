@@ -64,8 +64,16 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 gymUsers = dataSnapshot.child("Counter").getValue(Integer.class);
-                Log.e("counterUpdate", "updateCounter");
-                counterTV.setText("COUNTER: " + gymUsers);
+                if(gymUsers < 3){
+                    counterTV.setText("Low Crowdedness!");
+                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
+                }else if( gymUsers >=3 && gymUsers <5){
+                    counterTV.setText("Medium Crowdedness!");
+                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorOrange));
+                }else if(gymUsers >=5 && gymUsers <=7){
+                    counterTV.setText("High Crowdedness!");
+                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                }
             }
 
             @Override
@@ -73,6 +81,8 @@ public class ActivityFragment extends Fragment {
 
             }
         });
+
+
     }
 
 }
