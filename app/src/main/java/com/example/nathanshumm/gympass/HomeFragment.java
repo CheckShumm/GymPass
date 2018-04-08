@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -81,35 +82,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         registerButton.setOnClickListener(this);
 
 
-        ChildEventListener childEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.e("HERE", "test");
-                name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
-            }
+//        ChildEventListener childEventListener = new ChildEventListener() {
+//            @Override
+//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//                Log.e("HERE", "test");
+//                name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
+//            }
+//
+//            @Override
+//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onChildRemoved(DataSnapshot dataSnapshot) {
+//
+//            }
+//
+//            @Override
+//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-
-        databaseReference.addChildEventListener(childEventListener);
+ //       databaseReference.addChildEventListener(childEventListener);
 
         if(registered()){
             registerButton.setVisibility(View.GONE);
@@ -138,15 +139,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         super.onResume();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        if(registered()){
-            registerButton.setVisibility(View.GONE);
-            noRegistrationTV.setVisibility(View.GONE);
-            generateQR();
-        }
-        super.onAttach(context);
-    }
 
     @Override
     public void onClick(View v) {
@@ -192,7 +184,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     public boolean registered(){
-        Log.e("name:   ", name);
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
+                Log.e("nameCheck", "name");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         return name != "none";
     }
 
