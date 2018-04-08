@@ -85,50 +85,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         qrGenButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
 
-
-//        ChildEventListener childEventListener = new ChildEventListener() {
-//            @Override
-//            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-//                Log.e("HERE", "test");
-//                name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
-//            }
-//
-//            @Override
-//            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onChildRemoved(DataSnapshot dataSnapshot) {
-//
-//            }
-//
-//            @Override
-//            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        };
-
- //       databaseReference.addChildEventListener(childEventListener);
-
         if(registered()){
             registerButton.setVisibility(View.GONE);
             noRegistrationTV.setVisibility(View.GONE);
             generateQR();
         }
-
-//        Fragment currentFragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.homeFragmentID);
-//        if (currentFragment instanceof HomeFragment ){
-//            FragmentTransaction fragTransaction = (getActivity()).getSupportFragmentManager().beginTransaction();
-//            fragTransaction.detach(currentFragment);
-//            fragTransaction.attach(currentFragment);
-//            fragTransaction.commit();
-//        }
 
         return homeView;
     }
@@ -193,15 +154,19 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(firebaseAuth.getUid()).child("Name").exists()){
+                if(dataSnapshot.child(firebaseUser.getUid()).child("Name").exists()){
                     Log.e("child", "haschild");
                     registeredUser = true;
                 }else{
                     Log.e("child", "hasNoChild");
                     registeredUser = false;
                 }
+
                 name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
-                //Log.e("nameCheck", name);
+                Log.e("UIDCHECK",firebaseUser.getUid());
+                if(name !=null){
+                    Log.e("nameCheck", name);
+                }
             }
 
             @Override
