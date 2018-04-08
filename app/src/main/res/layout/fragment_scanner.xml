@@ -2,12 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@color/colorLightGrey"
     tools:context="com.example.nathanshumm.gympass.ScannerFragment">
 
-    <include
-        layout="@layout/toolbar">
-    </include>
+
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,20 +13,21 @@
         android:gravity="center"
         android:orientation="vertical">
         <TextView
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="35dp"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="QR CODE SCANNER"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"/>
+            android:text="Le Gym Scanner"
+            android:textColor="@color/colorBurgundy"
+            android:textSize="30sp" />
 
         <LinearLayout
             android:id="@+id/MemberInfoHolder"
             android:layout_width="match_parent"
             android:layout_margin="16dp"
-            android:background="@color/colorWhite"
+            android:background="@color/colorLightGrey"
             android:gravity="center"
+
             android:orientation="vertical"
             android:visibility="gone"
             android:layout_height="wrap_content">
@@ -36,42 +35,61 @@
                 android:id="@+id/scannerFirstName"
                 android:text=""
                 android:textSize="25sp"
+                android:layout_margin="10dp"
                 android:textColor="@color/colorPrimary"
-                android:layout_width="wrap_content"
+                android:background="@color/colorWhite"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/scannerLastName"
                 android:text=""
                 android:textSize="25sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="5dp"
-                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorWhite"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/scannerImage"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_margin="16dp"/>
             <TextView
                 android:id="@+id/scannerMembership"
                 android:text=""
                 android:textSize="25sp"
+                android:layout_margin="10dp"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
+                android:background="@color/colorWhite"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <TextView
                 android:id="@+id/scannerClasses"
                 android:text=""
                 android:textSize="25sp"
                 android:textColor="@color/colorPrimary"
-                android:layout_marginTop="20dp"
-                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@color/colorWhite"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
+        <Space
+            android:id="@+id/scannerSpace"
+            android:layout_width="1dp"
+            android:visibility="visible"
+            android:layout_height="300dp"/>
         <Button
             android:layout_marginTop="50dp"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/qrScanBtn"
-            android:text="SCAN"
+            android:textSize="20sp"
+            android:text="SCAN PASS"
             android:textColor="@color/colorWhite"
             android:background="@color/colorBurgundy"
             />

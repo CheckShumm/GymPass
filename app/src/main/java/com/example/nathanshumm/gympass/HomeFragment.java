@@ -3,6 +3,7 @@ package com.example.nathanshumm.gympass;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -44,7 +45,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
-
+    private Boolean registeredUser;
+    private SharedPreferences sharedPreferences;
     private TextView noRegistrationTV;
     private String name = "none";
     private LinearLayout qrLayout;
@@ -70,6 +72,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
+
+        sharedPreferences = this.getActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE);
 
         // Register Button
         noRegistrationTV = (TextView) homeView.findViewById(R.id.tv_noRegister);
@@ -184,11 +188,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     public boolean registered(){
+       // name = sharedPreferences.getString("nameKey",null);
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(firebaseAuth.getUid()).child("Name").exists()){
+                    Log.e("child", "haschild");
+                    registeredUser = true;
+                }else{
+                    Log.e("child", "hasNoChild");
+                    registeredUser = false;
+                }
                 name = dataSnapshot.child(firebaseUser.getUid()).child("Name").getValue(String.class);
-                Log.e("nameCheck", "name");
+                //Log.e("nameCheck", name);
             }
 
             @Override
@@ -196,6 +209,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
             }
         });
+
+
         return name != "none";
     }
 
