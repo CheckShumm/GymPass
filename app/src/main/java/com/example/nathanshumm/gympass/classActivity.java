@@ -9,6 +9,13 @@ import android.content.Intent;
 import android.view.Window;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Date;
+
 public class classActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button button_fusion;
@@ -18,6 +25,18 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
 
     private Window window;
     private Toolbar toolbar;
+
+
+    private Date expireDate;
+    private String expiry = "Aug 5, 2020";
+    private Date nextMonth;
+
+    // Database instance
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +50,13 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Classes");
 
+        // Database
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        firebaseAuth = firebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
+
         button_fusion = (Button)findViewById(R.id.fusion_button);
         button_fusion.setOnClickListener(this);
 
@@ -42,7 +68,11 @@ public class classActivity extends AppCompatActivity implements View.OnClickList
 
         button_zumba = (Button)findViewById(R.id.zumba_button);
         button_zumba.setOnClickListener(this);
+
     }
+
+
+
 
 
     @Override

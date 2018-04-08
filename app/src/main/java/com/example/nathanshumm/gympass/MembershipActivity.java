@@ -59,7 +59,7 @@ public class MembershipActivity extends AppCompatActivity {
         window = this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.colorBurgundy));
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Membership");
 
@@ -70,100 +70,112 @@ public class MembershipActivity extends AppCompatActivity {
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        studentButton=(Button)findViewById(R.id.btn_student);
-
-        studentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Student");
-                Intent i=new Intent(MembershipActivity.this, StudentPayment.class);
-                startActivity (i);
-                finish();
-            }
-        });
-
-        staffButton=(Button)findViewById(R.id.btn_staff);
-
-        staffButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Staff / Faculty");
-                Intent i=new Intent(MembershipActivity.this, StaffPayment.class);
-                startActivity (i);
-                finish();
-            }
-        });
-
-        seniorButton=(Button)findViewById(R.id.btn_seniors);
-
-        seniorButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Senior");
-                Intent i=new Intent(MembershipActivity.this, SeniorPayment.class);
-                startActivity (i);
-                finish();
-            }
-        });
-
-        publicButton=(Button)findViewById(R.id.btn_public);
-
-        publicButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(MembershipActivity.this, PublicPayment.class);
-                startActivity (i);
-                finish();
-
-            }
-        });
-
-        setExpiration();
-        if(expiry != "Aug 5, 2020") {
-            if (expireDate.after(nextMonth)) {
-
-                Toast.makeText(MembershipActivity.this, "You are already a member", Toast.LENGTH_LONG).show();
-                studentButton.setEnabled(false);
-                seniorButton.setEnabled(false);
-                publicButton.setEnabled(false);
-                staffButton.setEnabled(false);
-            }
-        }
-
-    }
-
-    public void setExpiration(){
+        studentButton = (Button) findViewById(R.id.btn_student);
+        staffButton = (Button) findViewById(R.id.btn_staff);
+        seniorButton = (Button) findViewById(R.id.btn_seniors);
+        publicButton = (Button) findViewById(R.id.btn_public);
 
 
-        Calendar cal = Calendar.getInstance();
-        Date today = cal.getTime();
-        cal.add(Calendar.MONTH,0);
-        nextMonth = cal.getTime();
-        String todayString= DateFormat.getDateInstance().format(nextMonth);
 
-        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.e("HERE132", "test");
-                Log.e("EXPIRE123", expiry);
-                expiry = dataSnapshot.child(firebaseUser.getUid()).child("Expiration").getValue(String.class);
-                if (expiry == null) {
-                    expiry = "Aug 5, 2020";
+        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference pass = rootRef.child("le-gym-pass");
+        DatabaseReference users = rootRef.child("Users");
+        users.addListenerForSingleValueEvent(new ValueEventListener() {
+
+
+            public void onDataChange(DataSnapshot snapshot) {
+                if (snapshot.child(firebaseUser.getUid()).child("Expiration").exists()) {
+                   final String exp=snapshot.child(firebaseUser.getUid()).child("Expiration").getValue(String.class);
+                    Toast.makeText(MembershipActivity.this, "You are already have a membership, which expires on: " +exp, Toast.LENGTH_LONG).show();
+
+
+                    studentButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MembershipActivity.this, "You are already have a membership, which expires on: " +exp , Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+                    staffButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MembershipActivity.this, "You are already have a membership, which expires on: " +exp , Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+
+                    seniorButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MembershipActivity.this, "You are already have a membership, which expires on: " +exp , Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+                    publicButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(MembershipActivity.this, "You are already have a membership, which expires on: " +exp , Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
+
+                } else {
+
+                    studentButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Student");
+                            Intent i = new Intent(MembershipActivity.this, StudentPayment.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+
+                    staffButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Staff / Faculty");
+                            Intent i = new Intent(MembershipActivity.this, StaffPayment.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+
+                    seniorButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            databaseReference.child("Users").child(firebaseUser.getUid()).child("Membership").setValue("Senior");
+                            Intent i = new Intent(MembershipActivity.this, SeniorPayment.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+                    publicButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(MembershipActivity.this, PublicPayment.class);
+                            startActivity(i);
+                            finish();
+
+                        }
+                    });
                 }
-                Log.e("EXPIRE", expiry);
-                SimpleDateFormat sdf = new SimpleDateFormat("MMM d, yyyy");
-                try {
-                    expireDate = sdf.parse(expiry);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
             }
-
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
+
+
     }
 }
+

@@ -8,6 +8,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class SeniorPayment extends AppCompatActivity {
 
@@ -15,6 +25,13 @@ public class SeniorPayment extends AppCompatActivity {
     Button regisClassButton;
     private Window window;
     private Toolbar toolbar;
+
+    private FirebaseDatabase database;
+    private DatabaseReference databaseReference;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+
+    static TextView textDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +45,10 @@ public class SeniorPayment extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Senior Payment");
 
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+        firebaseAuth = firebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
 
         doneButton=(Button)findViewById(R.id.btn_done);
 
@@ -48,6 +69,18 @@ public class SeniorPayment extends AppCompatActivity {
                 startActivity (i);
             }
         });
+
+
+        textDate=(TextView) findViewById(R.id.tv_date);
+        Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
+        cal.add(Calendar.MONTH,4);
+        Date nextMonth = cal.getTime();
+        String nextMonthString= DateFormat.getDateInstance().format(nextMonth);
+        textDate.setText(nextMonthString);
+
+
+        databaseReference.child("Users").child(firebaseUser.getUid()).child("Expiration").setValue(nextMonthString);
     }
 
 }
