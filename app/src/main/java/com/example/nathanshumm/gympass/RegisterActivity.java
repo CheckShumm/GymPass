@@ -230,11 +230,11 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
 
-       // if (imageView.getDrawable()==null){
-       //     Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
-        //    valid=false;
+        if (imageView.getDrawable()==null){
+            Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
+            valid=false;
 
-      //  }
+        }
 
 
         return valid;
