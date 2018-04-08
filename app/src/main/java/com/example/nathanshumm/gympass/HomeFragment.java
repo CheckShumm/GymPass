@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
 
-    private Boolean registeredUser;
+    private Boolean registeredUser = false;
     private SharedPreferences sharedPreferences;
     private TextView noRegistrationTV;
     private String name = "none";
@@ -85,18 +85,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         qrGenButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
 
-        if(registered()){
-            registerButton.setVisibility(View.GONE);
-            noRegistrationTV.setVisibility(View.GONE);
-            generateQR();
-        }
-
         return homeView;
     }
 
     @Override
     public void onResume() {
-        if(registered()){
+        if(name != null){
             registerButton.setVisibility(View.GONE);
             noRegistrationTV.setVisibility(View.GONE);
             generateQR();
@@ -178,5 +172,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
         return name != "none";
     }
+
+    public void userRegistered(String newName){
+        name = newName;
+        registerButton.setVisibility(View.GONE);
+        noRegistrationTV.setVisibility(View.GONE);
+        generateQR();
+    }
+
 
 }

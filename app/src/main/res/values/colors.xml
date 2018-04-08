@@ -9,5 +9,8 @@
     <color name="colorDarkRed">#871111</color>
     <color name="colorDarkGrey">#211d1d</color>
     <color name="colorLightGrey">#dbdde0</color>
+    <color name="colorRed">#FF0000</color>
+    <color name="colorLightBlue">#42b3f4</color>
+    <color name="colorOrange">#ffae00</color>
     <color name="colorWhiteTransparent">#80FFFFFF</color>
 </resources>
