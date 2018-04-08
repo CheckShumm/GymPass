@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private String classesScanner;
     private String membershipScanner;
 
+    private String downloadURL;
+
     private SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -323,8 +325,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     lastNameScanner = dataSnapshot.child("Users").child(id).child("Surname").getValue(String.class);
                     membershipScanner = dataSnapshot.child("Users").child(id).child("Membership").getValue(String.class);
                     classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
-                    //databaseReference.child("DoorStatus").setValue(1);
-                    scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner);
+                    downloadURL = dataSnapshot.child("Users").child(id).child("profileURL").getValue(String.class);
+                    databaseReference.child("DoorStatus").setValue(1);
+                    scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner, downloadURL);
                 }else{
 
                 }

@@ -166,7 +166,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    public void setNameTextView(String firstName, String lastName, String membership, String classes){
+    public void setNameTextView(String firstName, String lastName, String membership, String classes, String URL){
         firstNameTV.setText(firstName);
         lastNameTV.setText(lastName);
         membershipTV.setText(membership);
@@ -175,7 +175,7 @@ public class ScannerFragment extends Fragment implements View.OnClickListener{
         memberInfo.setVisibility(View.VISIBLE);
         scannerSpace.setVisibility(View.GONE);
 
-        String URL = sharedPreferences.getString("profileKey",null);
+       // String URL = sharedPreferences.getString("profileKey",null);
         if(URL != "profileKey" || URL != null) {
             Picasso.with(this.getActivity()).load(URL).fit().centerCrop().into(scannerProfileImage);
             scannerProfileImage.setRotation(270);
