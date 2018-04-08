@@ -68,6 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView imageView;
     private Window window;
 
+    private Uri downloadUrl;
+
     //Button btnpic;
     //ImageView imgTakenPic;
     private static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -148,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Log.e("Upload", "uploading image");
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                downloadUrl = taskSnapshot.getDownloadUrl();
                 SharedPreferences sharedPreferences = getSharedPreferences("profile", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("profileKey",downloadUrl.toString());
@@ -200,6 +202,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void onSignupSuccess(){
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Name").setValue(etname);
         databaseReference.child("Users").child(firebaseUser.getUid()).child("Surname").setValue(etsurname);
+        databaseReference.child("Users").child(firebaseUser.getUid()).child("profileURL").setValue(downloadUrl.toString());
 
         Intent i = new Intent (RegisterActivity.this, ChooseActivity.class);
         startActivity (i);
