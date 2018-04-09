@@ -1,6 +1,8 @@
 package com.example.nathanshumm.gympass;
 
 
+import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -50,13 +52,17 @@ public class ActivityFragment extends Fragment {
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
-        updateCounter();
+
         return activityView;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        Activity activity = getActivity();
+        if(isAdded() && activity != null) {
+            updateCounter();
+        }
+        super.onStart();
     }
 
     public void updateCounter(){
@@ -66,13 +72,13 @@ public class ActivityFragment extends Fragment {
                 gymUsers = dataSnapshot.child("Counter").getValue(Integer.class);
                 if(gymUsers < 3){
                     counterTV.setText("Low Crowdedness!");
-                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorLightBlue));
+                    counterTV.setBackgroundColor(Color.CYAN);
                 }else if( gymUsers >=3 && gymUsers <5){
                     counterTV.setText("Medium Crowdedness!");
-                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorOrange));
+                    counterTV.setBackgroundColor(Color.GREEN);
                 }else if(gymUsers >=5){
                     counterTV.setText("High Crowdedness!");
-                    counterTV.setBackgroundColor(getResources().getColor(R.color.colorRed));
+                    counterTV.setBackgroundColor(Color.RED);
                 }
             }
 
