@@ -70,7 +70,7 @@ public class ActivityFragment extends Fragment {
                 }else if( gymUsers >=3 && gymUsers <5){
                     counterTV.setText("Medium Crowdedness!");
                     counterTV.setBackgroundColor(getResources().getColor(R.color.colorOrange));
-                }else if(gymUsers >=5 && gymUsers <=7){
+                }else if(gymUsers >=5){
                     counterTV.setText("High Crowdedness!");
                     counterTV.setBackgroundColor(getResources().getColor(R.color.colorRed));
                 }
