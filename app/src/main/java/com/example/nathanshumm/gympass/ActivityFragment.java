@@ -51,38 +51,13 @@ public class ActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         View activityView = inflater.inflate(R.layout.fragment_activity, container, false);
         counterTV = (TextView)activityView.findViewById(R.id.counterTV);
+        graphView = (GraphView)activityView.findViewById(R.id.activityGraph);
 
         // Database
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
-
-        graphView = (GraphView)activityView.findViewById(R.id.activityGraph);
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
-                new DataPoint(1, 3),
-                new DataPoint(2, 4),
-                new DataPoint(3, 5),
-                new DataPoint(4, 4),
-                new DataPoint(5, 3),
-                new DataPoint(6, 5),
-        });
-        graphView.addSeries(series);
-
-        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
-        staticLabelsFormatter.setVerticalLabels(new String[] {"Low", "Med", "High"});
-        staticLabelsFormatter.setHorizontalLabels(new String[] {"7am", "10am", "1pm", "4pm", "7pm", "10pm"});
-        graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
-
-        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
-            @Override
-            public int get(DataPoint data) {
-                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
-            }
-        });
-
-        series.setSpacing(8);
-        series.setDrawValuesOnTop(true);
 
         return activityView;
     }
@@ -101,12 +76,13 @@ public class ActivityFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 gymUsers = dataSnapshot.child("Counter").getValue(Integer.class);
+                setGraph(gymUsers);
                 if(gymUsers < 3){
                     counterTV.setText("Low Crowdedness!");
-                    counterTV.setBackgroundColor(Color.CYAN);
+                    counterTV.setBackgroundColor(Color.rgb(66,179,244));
                 }else if( gymUsers >=3 && gymUsers <5){
                     counterTV.setText("Medium Crowdedness!");
-                    counterTV.setBackgroundColor(Color.GREEN);
+                    counterTV.setBackgroundColor(Color.rgb(255,174,0));
                 }else if(gymUsers >=5){
                     counterTV.setText("High Crowdedness!");
                     counterTV.setBackgroundColor(Color.RED);
@@ -119,7 +95,38 @@ public class ActivityFragment extends Fragment {
             }
         });
 
+    }
 
+    public void setGraph(int counter){
+
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(1, 2),
+                new DataPoint(2, 4),
+                new DataPoint(3, counter),
+                new DataPoint(4, 8),
+                new DataPoint(5, 4),
+                new DataPoint(6, 2),
+        });
+        graphView.addSeries(series);
+        graphView.getViewport().setMinY(0);
+        graphView.getViewport().setMaxY(10);
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
+        staticLabelsFormatter.setVerticalLabels(new String[] {"Low", "Med", "High"});
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"7a", "10a", "1p", "4p", "7p", "10p"});
+        graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/7), 200);
+            }
+        });
+
+        series.setSpacing(5);
+        series.setDrawValuesOnTop(true);
+        graphView.getViewport().setYAxisBoundsManual(true);
+        graphView.removeAllSeries();
+        graphView.addSeries(series);
     }
 
 }
