@@ -84,7 +84,6 @@
             android:visibility="visible"
             android:layout_height="300dp"/>
         <Button
-            android:layout_marginTop="50dp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:id="@+id/qrScanBtn"
