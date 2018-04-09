@@ -303,7 +303,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-               // Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("SCAN", result.getContents());
                 //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
@@ -340,6 +340,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner, downloadURL);
                 }else{
                     Log.e("ScannerStatus", "Not Scanning");
+                    invalidMessage();
                 }
             }
 
@@ -371,6 +372,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
+    }
+
+    public void invalidMessage(){
+        Toast.makeText(this, "Invalid Gym Pass!", Toast.LENGTH_LONG).show();
     }
 
 
