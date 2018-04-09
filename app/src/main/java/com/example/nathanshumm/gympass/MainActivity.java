@@ -249,8 +249,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Picasso.with(MainActivity.this).load(downloadURL).fit().centerCrop().into(navProfileImage);
             navProfileImage.setRotation(270);
             if (name != null) {
-                homeFragment.userRegistered(name);
-                setFragment(homeFragment);
+                if(firebaseUser.getUid().toString().contains("T3VGSX7")){
+                    //Log.e("UID", firebaseUser.getUid().toString());
+                    setFragment(scannerFragment);
+                }else {
+                    homeFragment.userRegistered(name);
+                    setFragment(homeFragment);
+                }
                 navFirstname.setText(name);
                 navSurname.setText(surname);
                 navEmail.setText(email);
@@ -331,9 +336,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     classesScanner = dataSnapshot.child("Users").child(id).child("Classes").getValue(String.class);
                     downloadURL = dataSnapshot.child("Users").child(id).child("profileURL").getValue(String.class);
                     databaseReference.child("DoorStatus").setValue(1);
+                    Log.e("ScannerStatus", "Scanning");
                     scannerFragment.setNameTextView(firstNameScanner, lastNameScanner, membershipScanner, classesScanner, downloadURL);
                 }else{
-
+                    Log.e("ScannerStatus", "Not Scanning");
                 }
             }
 
