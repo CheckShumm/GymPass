@@ -303,12 +303,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
+               // Toast.makeText(this, "Scanner cancelled", Toast.LENGTH_LONG).show();
             } else {
                 Log.e("SCAN", result.getContents());
-                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 displayInfo(result.getContents());
-                databaseReference.child("DoorStatus").setValue(1);
+                //databaseReference.child("DoorStatus").setValue(1);
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
