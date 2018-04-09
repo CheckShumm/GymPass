@@ -63,6 +63,7 @@ public class MembershipActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Membership");
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //FOR BACK BUTTON
 
         // Database
         database = FirebaseDatabase.getInstance();
@@ -130,6 +131,13 @@ public class MembershipActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    // back button functionality
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     public void setExpiration(){

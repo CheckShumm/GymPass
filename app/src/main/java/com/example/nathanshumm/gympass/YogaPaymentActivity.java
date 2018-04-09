@@ -9,7 +9,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.support.v7.widget.Toolbar;
 
-
 public class YogaPaymentActivity extends AppCompatActivity {
 
     Button doneButton;
