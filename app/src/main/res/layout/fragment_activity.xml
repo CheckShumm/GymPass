@@ -8,6 +8,21 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/activityGraph"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="250dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="Current Trarffic:"
+            android:textColor="@color/colorBurgundy"/>
         <TextView
             android:id="@+id/counterTV"
             android:padding="20dp"
@@ -15,7 +30,6 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:background="@color/colorAccent"
-            android:layout_marginTop="100dp"
             android:layout_gravity="center"
             android:textAlignment="center"
             android:layout_width="wrap_content"

@@ -341,6 +341,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }else{
                     Log.e("ScannerStatus", "Not Scanning");
                     invalidMessage();
+                    databaseReference.child("Invalid").setValue(1);
                 }
             }
 

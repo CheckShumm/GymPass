@@ -18,6 +18,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 
 
 /**
@@ -31,6 +36,7 @@ public class ActivityFragment extends Fragment {
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private GraphView graphView;
 
     private int gymUsers;
 
@@ -52,6 +58,31 @@ public class ActivityFragment extends Fragment {
         firebaseAuth = firebaseAuth.getInstance();
         firebaseUser = firebaseAuth.getCurrentUser();
 
+        graphView = (GraphView)activityView.findViewById(R.id.activityGraph);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[] {
+                new DataPoint(1, 3),
+                new DataPoint(2, 4),
+                new DataPoint(3, 5),
+                new DataPoint(4, 4),
+                new DataPoint(5, 3),
+                new DataPoint(6, 5),
+        });
+        graphView.addSeries(series);
+
+        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graphView);
+        staticLabelsFormatter.setVerticalLabels(new String[] {"Low", "Med", "High"});
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"7am", "10am", "1pm", "4pm", "7pm", "10pm"});
+        graphView.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);
+
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/4, (int) Math.abs(data.getY()*255/6), 100);
+            }
+        });
+
+        series.setSpacing(8);
+        series.setDrawValuesOnTop(true);
 
         return activityView;
     }
