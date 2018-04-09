@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onResume() {
-        if(name != null){
+        if(name != null && name != "none"){
             registerButton.setVisibility(View.GONE);
             noRegistrationTV.setVisibility(View.GONE);
             generateQR();
