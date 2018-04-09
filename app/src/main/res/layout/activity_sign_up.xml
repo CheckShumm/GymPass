@@ -36,22 +36,28 @@
         android:orientation="vertical">
 
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:id="@+id/et_signupEmail"
             android:inputType="textEmailAddress"
             android:hint="Email Address"
-            android:layout_margin="50dp"/>
+            android:layout_marginBottom="16dp"/>
         <EditText
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:id="@+id/et_signupPassword"
             android:inputType="textPassword"
             android:gravity="center"
             android:hint="Password"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"/>
+            android:layout_marginBottom="16dp"/>
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_signupPassword2"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:hint="Retype Password" />
         <Button
             android:id="@+id/signUpBtn"
             android:gravity="center"

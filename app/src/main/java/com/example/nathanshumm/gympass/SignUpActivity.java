@@ -26,6 +26,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Window window;
     private EditText email;
     private EditText password;
+    private EditText passwordVerify;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     private FirebaseDatabase database;
@@ -42,6 +43,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         email = (EditText)findViewById(R.id.et_signupEmail);
         password = (EditText)findViewById(R.id.et_signupPassword);
+        passwordVerify = (EditText)findViewById(R.id.et_signupPassword2);
         loginButton = (Button)findViewById(R.id.signUpBtn);
         firebaseAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -55,26 +57,32 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(SignUpActivity.this , "Username or password field is empty!", Toast.LENGTH_SHORT).show();
-        } else {
-            final ProgressDialog progressDialog = ProgressDialog.show(SignUpActivity.this, "Please wait...", "Processing...", true);
-            firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            progressDialog.dismiss();
+        } else if(!password.getText().toString().equals(passwordVerify.getText().toString())) {
+            Log.e("password", password.getText().toString() + "\n" + passwordVerify.getText().toString());
+            Toast.makeText(SignUpActivity.this , "Passwords do not match please try again!", Toast.LENGTH_SHORT).show();
+            password.setText("");
+            passwordVerify.setText("");
+        }else{
+                final ProgressDialog progressDialog = ProgressDialog.show(SignUpActivity.this, "Please wait...", "Processing...", true);
+                firebaseAuth.createUserWithEmailAndPassword(email.getText().toString(), password.getText().toString())
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                progressDialog.dismiss();
 
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                writeNewUser();
-                                Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
-                                SignUpActivity.this.startActivity(loginActivityIntent);
-                                SignUpActivity.this.finish();
-                            } else {
-                                Log.e("Registration_Err", task.getException().getMessage());
-                                Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                    writeNewUser();
+                                    Intent loginActivityIntent = new Intent(SignUpActivity.this, LogInActivity.class);
+                                    SignUpActivity.this.startActivity(loginActivityIntent);
+                                    SignUpActivity.this.finish();
+                                } else {
+                                    Log.e("Registration_Err", task.getException().getMessage());
+                                    Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
+                        });
+
         }
     }
 

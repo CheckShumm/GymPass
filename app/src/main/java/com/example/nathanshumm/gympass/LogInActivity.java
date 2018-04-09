@@ -52,6 +52,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    public void onBackPressed() {
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch(v.getId()){
