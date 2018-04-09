@@ -177,5 +177,12 @@ public class MembershipActivity extends AppCompatActivity {
 
 
     }
+
+    // back button functionality
+  //  @Override
+   // public boolean onSupportNavigateUp() {
+    //    onBackPressed();
+     //   return true;
+   // }
 }
 
