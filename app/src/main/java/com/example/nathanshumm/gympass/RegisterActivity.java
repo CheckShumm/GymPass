@@ -33,8 +33,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -112,8 +115,18 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            String Email = dataSnapshot.child("Users").child(firebaseUser.getUid()).child("Email").getValue(String.class);
+            email.setText(Email);
+        }
 
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
 
+        }
+         });
 
 
         photoButton = (Button) findViewById(R.id.btn_picture);
@@ -230,11 +243,11 @@ public class RegisterActivity extends AppCompatActivity {
             valid=false;
         }
 
-        if (imageView.getDrawable()==null){
-            Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
-            valid=false;
+       // if (imageView.getDrawable()==null){
+       //     Toast.makeText(this, "Please take a profile picture", Toast.LENGTH_SHORT).show();
+        //    valid=false;
 
-        }
+      //  }
 
 
         return valid;
